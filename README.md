@@ -8,7 +8,7 @@ The device will use a rotating base with 2 motors mounted on top. 1 motor will s
 
 
 
-__Figure 3:__ 2.5 DOF Image Plotter Schematic.
+__Figure 1:__ 2.5 DOF Image Plotter Schematic.
 
 ## BOM 
 | Qty. | Part                  | Source                | Est. Cost | 
