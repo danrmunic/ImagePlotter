@@ -14,13 +14,15 @@ __Figure 3:__ 2.5 DOF Image Plotter Schematic.
 |  2   | Pittperson Gearmotors     | ME405 Tub             |     -     |
 |  1   | Nucleo with Shoe          | ME405 Tub             |     -     |
 |  2   | Black & Red Sharpie&trade | Pre-Owned     |   -   |
-|  2   | 5A Power MOSFETs          | [Digi-Key](https://www.digikey.com/en/products/detail/stmicroelectronics/STN3NF06L/654517?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDaIALAJwDsIAugL6OEBMZIAygCoByAzLwBiABgBsAGQaMgA)        |   $3.80   |
+|  2   | 5A Power MOSFETs          | [DigiiKey](https://www.digikey.com/en/products/detail/stmicroelectronics/STN3NF06L/654517?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDaIALAJwDsIAugL6OEBMZIAygCoByAzLwBiABgBsAGQaMgA)        |   $3.80   |
 |  1   | .?” Guide Rails 10” Length | McMaster | ? |
 |  1   | .?” Threaded Rod 10” Length       | McMaster | ? |
 |  1   | .?” Lead Screw        | McMaster | ? |
 |  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
 |  1   | Solenoid Actuator        | [Digikey](https://www.digikey.com/en/products/detail/sparkfun-electronics/ROB-11015/6163694) | $4.95 |
 |  1   | Rotating Base       | McMaster | ? |
+|  3   | .5" Ball Bearing       | McMaster | ? |
+|  1   | Solenoid and pen platform | 3D Print | ? |
 
 
 ## Classes
