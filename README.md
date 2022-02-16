@@ -4,7 +4,8 @@ We want to make a 2 and a half degree of freedom robot capable of drawing any im
 
 The device will use a rotating base with 2 motors mounted on top. 1 motor will spin a a wheel to create rotational motion another motor will create linear motion that will move the pen alongside the shaft. This will allow the pen to mark up the entire page. We will be using a solenoid actuator connected to the pen in order to lift and lower the pen. This will be controlled by a signal from the microcontroller. Our motors will be requiring a larger current supply than our microcontroller can support, so we will be using MOSFET's in order to be able to properly supply sufficient voltage to the motors. 
 
-![Scaled Sketch for Project](https://user-images.githubusercontent.com/97563760/154211283-df2f4443-c45a-4227-91f0-7bb73f45bf61.png)
+![Scaled Sketch for Project](https://user-images.githubusercontent.com/97563760/154212086-1d5e8bd8-d7ae-4cbe-9947-79c46431a7ba.png)
+
 
 
 __Figure 3:__ 2.5 DOF Image Plotter Schematic.
