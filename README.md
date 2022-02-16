@@ -13,11 +13,13 @@ __Figure 3:__ 2.5 DOF Image Plotter Schematic.
 |:----:|:----------------------|:----------------------|:---------:|
 |  2   | Pittperson Gearmotors     | ME405 Tub             |     -     |
 |  1   | Nucleo with Shoe          | ME405 Tub             |     -     |
-|  2   | Black & Red Sharpie&trade | Office Min&trade;     |   $1.02   |
-|  2   | 5A Power MOSFETs          | Doggy-Key             |   $2.34   |
+|  2   | Black & Red Sharpie&trade | Pre-Owned     |   -   |
+|  3   | 5A Power MOSFETs          | Doggy-Key             |   $3.51   |
 |  1   | .?” Guide Rails 10” Length | McMaster | ? |
 |  1   | .?” Threaded Rod 10” Length       | McMaster | ? |
 |  1   | .?” Lead Screw        | McMaster | ? |
+|  1   | 3” Rubber Wheel       | McMaster | $1.98 |
+|  1   | Solenoid Actuator        | Digikey | $4.95 |
 
 
 ## Classes
