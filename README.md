@@ -4,7 +4,7 @@ We want to make a 2 and a half degree of freedom robot capable of drawing any im
 
 The device will use a rotating base with 2 motors mounted on top. 1 motor will spin a a wheel to create rotational motion another wheel will create linear motion w
 
-![Schematic](Schematic.png)
+![Scaled Sketch](https://user-images.githubusercontent.com/97563760/154204014-fe9ef3ca-9391-4aec-83e9-0e81f0d38162.png)
 
 __Figure 3:__ 2.5 DOF Image Plotter Schematic.
 
