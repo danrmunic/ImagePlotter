@@ -18,7 +18,7 @@ __Figure 3:__ 2.5 DOF Image Plotter Schematic.
 |  1   | .?” Guide Rails 10” Length | McMaster | ? |
 |  1   | .?” Threaded Rod 10” Length       | McMaster | ? |
 |  1   | .?” Lead Screw        | McMaster | ? |
-|  1   | 3” Rubber Wheel       | (McMaster)[https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/] | $1.98 |
+|  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
 |  1   | Solenoid Actuator        | Digikey | $4.95 |
 
 
