@@ -18,7 +18,7 @@ __Figure 1:__ 2.5 DOF Image Plotter Schematic.
 |  2   | Black & Red Sharpie&trade | Pre-Owned     |   -   |
 |  2   | 5A Power MOSFETs          | [DigiiKey](https://www.digikey.com/en/products/detail/stmicroelectronics/STN3NF06L/654517?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDaIALAJwDsIAugL6OEBMZIAygCoByAzLwBiABgBsAGQaMgA)        |   $3.80   |
 |  1   | 3/8” Guide Rails 12” Long | [servocity](https://www.servocity.com/0-375-3-8-x-12-00-stainless-steel-precision-shafting/) | $5.18 |
-|  1   | 3/8” Threaded Rod 12” Long       | McMaster | ? |
+|  1   | 3/8” Threaded Rod 12” Long       | [roton](https://www.roton.com/product/acme-steel-screw-right-60750/) | 12.51 |
 |  1   | 3/8” Lead Screw        | McMaster | ? |
 |  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
 |  1   | Solenoid Actuator        | [Digikey](https://www.digikey.com/en/products/detail/sparkfun-electronics/ROB-11015/6163694) | $4.95 |
