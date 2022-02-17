@@ -23,7 +23,7 @@ __Figure 1:__ 2.5 DOF Image Plotter Schematic.
 |  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
 |  1   | Solenoid Actuator        | [Digikey](https://www.digikey.com/en/products/detail/sparkfun-electronics/ROB-11015/6163694) | $4.95 |
 |  1   | Rotating Base       | McMaster | ? |
-|  2   | 3/8" Ball Bearing       | [servocity](https://www.servocity.com/3-8-bore-bottom-tapped-pillow-block/) | ? |
+|  2   | 3/8" Ball Bearing       | [servocity](https://www.servocity.com/3-8-bore-bottom-tapped-pillow-block/) | $6.37 |
 |  1   | Solenoid and pen platform | 3D Print | ? |
 |  1   | Camera? | ? | ? |
 
