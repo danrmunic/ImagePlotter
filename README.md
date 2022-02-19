@@ -17,7 +17,7 @@ __Figure 1:__ 2.5 DOF Image Plotter Schematic.
 |  1   | Nucleo with Shoe          | ME405 Tub             |     -     |
 |  2   | Black & Red Sharpie&trade | Pre-Owned     |   -   |
 |  2   | 5A Power MOSFETs          | [DigiiKey](https://www.digikey.com/en/products/detail/stmicroelectronics/STN3NF06L/654517?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDaIALAJwDsIAugL6OEBMZIAygCoByAzLwBiABgBsAGQaMgA)        |   $3.80   |
-|  1   | 1/4” Guide Rod 12” Long | [servocity](https://www.servocity.com/0-375-3-8-x-12-00-stainless-steel-precision-shafting/) or https://www.servocity.com/0-375-3-8-x-12-00-stainless-steel-precision-shafting/| $5.18 |
+|  1   | 1/4” Guide Rod 12” Long | [servocity](https://www.servocity.com/0-375-3-8-x-12-00-stainless-steel-precision-shafting/) or ME405 Tub | $5.18 |
 |  1   | 1/4” Threaded Rod 12” Long       | ME405 Tub | - |
 |  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
 |  1   | 2.25” Chair Wheel       | [McMaster](https://www.mcmaster.com/24215T44/) | $2.30 |
