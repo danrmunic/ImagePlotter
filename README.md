@@ -37,8 +37,8 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
 ## Classes
 
-* [encoder.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/encoder.py)
-* [motor_driver.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/motor_driver.py)
+* [encoder.py]()(https://github.com/danrmunic/ImagePlotter/blob/main/src/encoder.py)
+* [motor_driver.py]()(https://github.com/danrmunic/ImagePlotter/blob/main/src/motor_driver.py)
 * [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py)
 * [controller.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/controller.py)
 * [user.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/user.py)
