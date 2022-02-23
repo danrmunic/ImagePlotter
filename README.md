@@ -35,23 +35,20 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 |  1   | Solenoid and pen platform | 3D Print |- |
 
 
-## Classes
+## Future Classes
+
+* [encoder.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/encoder.py)
+* [motor_driver.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/motor_driver.py)
+* [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py)
+* [controller.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/controller.py)
+* [user.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/user.py)
+* [logic.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/logic.py)
+* [solenoid.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/solenoid.py)
 
 ## Documentation
 
-## Website Link
-* [Image Plotter Website](https://danrmunic.github.io/ImagePlotter/index.html)
+* [Image Plotter Documentation](https://github.com/danrmunic/ImagePlotter)
 
-#  \image html TaskDiagrams.png "Figure 1: Task Diagram" <br>
-#  @subsection User Task
-#  \image html UserTaskDiagrams.png "Figure 2: UserTask Diagram" <br>
-#  @subsection Controller Task
-#  \image html ContorllerTaskDiagrams.png "Figure 3: Controller Task Diagram" <br>
-#  @subsection Encoder Task
-#  \image html EncoderTaskDiagrams.png "Figure 4: Encoder Task Diagram" <br>
-#  @subsection Motors Task
-#  \image html MotorTaskDiagrams.png "Figure 5: Motor Task Diagram" <br>
-#  @subsection Logic Task
-#  \image html LogicTaskDiagrams.png "Figure 6: Logic Task Diagram" <br>
-#  @subsection Solenoid Task
-#  \image html SolenoidTaskDiagrams.png "Figure 7: Solenoid Task Diagram" <br>
+## Website Link
+
+* [Image Plotter Website](https://danrmunic.github.io/ImagePlotter/index.html)
