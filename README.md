@@ -43,14 +43,14 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
 #  \image html TaskDiagrams.png "Figure 1: Task Diagram" <br>
 #  @subsection User Task
-# \image html UserTaskDiagrams.png "Figure 2: UserTask Diagram" <br>
+#  \image html UserTaskDiagrams.png "Figure 2: UserTask Diagram" <br>
 #  @subsection Controller Task
-#  
+#  \image html ContorllerTaskDiagrams.png "Figure 3: Controller Task Diagram" <br>
 #  @subsection Encoder Task
-# 
+#  \image html EncoderTaskDiagrams.png "Figure 4: Encoder Task Diagram" <br>
 #  @subsection Motors Task
-#  
+#  \image html MotorTaskDiagrams.png "Figure 5: Motor Task Diagram" <br>
 #  @subsection Logic Task
-# 
+#  \image html LogicTaskDiagrams.png "Figure 6: Logic Task Diagram" <br>
 #  @subsection Solenoid Task
-
+#  \image html SolenoidTaskDiagrams.png "Figure 7: Solenoid Task Diagram" <br>
