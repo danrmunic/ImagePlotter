@@ -3,12 +3,12 @@ We want to make a two and a half degree of freedom robot capable of drawing any 
 
 The device will use a rotating base with two motors mounted on top. One motor will spin a wheel to create rotational motion. Another motor will create linear motion that will move the pen linearly alongside a threaded shaft. The shaft will be parallel to each other and will be connected with bearings and the pen mount. This setup will allow the pen to mark up the entire page. We will be using a solenoid actuator and MOSFET to connect to the pen, and the solenoid will lift and lower the pen. Our complete setup will utilize a signal microcontroller taking commands from a PC. Our Patterson Gearmotors will require a larger voltage supply than our microcontroller can support, so we will be using the motor drivers with two H-bridges to control to control our motors in the project. 
 
-![Solidworks Model](SideView.png)
+![Solidworks Model](Images/SideView.png)
 
 __Figure 1:__ Back view of Solidworks model of 2.5 DOF Image Plotter Schematic.
 
 
-![Solidworks Model](OtherSideView.png)
+![Solidworks Model](Images/OtherSideView.png)
 
 __Figure 2:__ Front view of Solidworks model.
 
@@ -40,17 +40,18 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 ## Documentation
 
 ## Website Link
+* [Image Plotter Website](https://danrmunic.github.io/ImagePlotter/index.html)
 
-#  \image html Task Diagrams.png "Figure 1: Task Diagram" <br>
+#  \image html TaskDiagrams.png "Figure 1: Task Diagram" <br>
 #  @subsection User Task
-# \image html User Task Diagrams.png "Figure 2: UserTask Diagram" <br>
+#  \image html UserTaskDiagrams.png "Figure 2: UserTask Diagram" <br>
 #  @subsection Controller Task
-#  
+#  \image html ContorllerTaskDiagrams.png "Figure 3: Controller Task Diagram" <br>
 #  @subsection Encoder Task
-# 
+#  \image html EncoderTaskDiagrams.png "Figure 4: Encoder Task Diagram" <br>
 #  @subsection Motors Task
-#  
+#  \image html MotorTaskDiagrams.png "Figure 5: Motor Task Diagram" <br>
 #  @subsection Logic Task
-# 
+#  \image html LogicTaskDiagrams.png "Figure 6: Logic Task Diagram" <br>
 #  @subsection Solenoid Task
-
+#  \image html SolenoidTaskDiagrams.png "Figure 7: Solenoid Task Diagram" <br>
