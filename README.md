@@ -1,14 +1,21 @@
 # ImagePlotter
+We want to make a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC to create a masterpiece. The code will turn an image into a series of vectors that our system will draw the robot.
 
-We want to make a 2 and a half degree of freedom robot capable of drawing any image on a piece of paper and is capable of using computer vision or an uploaded image to create a masterpeice. When a user walks up into the robots view , the robot will recognise the user and will begin to draw. This project will be interactive and be able to capture memories with friends. The code will turn an image into a series of vectors that the robot will draw.
+The device will use a rotating base with two motors mounted on top. One motor will spin a wheel to create rotational motion. Another motor will create linear motion that will move the pen linearly alongside a threaded shaft. The shaft will be parallel to each other and will be connected with bearings and the pen mount. This setup will allow the pen to mark up the entire page. We will be using a solenoid actuator and MOSFET to connect to the pen, and the solenoid will lift and lower the pen. Our complete setup will utilize a signal microcontroller taking commands from a PC. Our Patterson Gearmotors will require a larger voltage supply than our microcontroller can support, so we will be using the motor drivers with two H-bridges to control to control our motors in the project. 
 
-The device will use a rotating base with 2 motors mounted on top. 1 motor will spin a wheel to create rotational motion another motor will create linear motion that will move the pen alongside the shaft. This will allow the pen to mark up the entire page. We will be using a solenoid actuator connected to the pen in order to lift and lower the pen. This will be controlled by a signal from the microcontroller. Our motors will be requiring a larger current supply than our microcontroller can support, so we will be using MOSFET's in order to be able to properly supply sufficient voltage to the motors. 
+![Solidworks Model](SideView.png)
+
+__Figure 1:__ Back view of Solidworks model of 2.5 DOF Image Plotter Schematic.
+
+
+![Solidworks Model](OtherSideView.png)
+
+__Figure 2:__ Front view of Solidworks model.
+
 
 ![Scaled Sketch for Project](https://user-images.githubusercontent.com/97563760/154212086-1d5e8bd8-d7ae-4cbe-9947-79c46431a7ba.png)
 
-
-
-__Figure 1:__ 2.5 DOF Image Plotter Schematic.
+__Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
 ## BOM 
 | Qty. | Part                  | Source                | Est. Cost | 
