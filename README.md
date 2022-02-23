@@ -3,7 +3,7 @@ We want to make a two and a half degree of freedom robot capable of drawing any 
 
 The device will use a rotating base with two motors mounted on top. One motor will spin a wheel to create rotational motion. Another motor will create linear motion that will move the pen linearly alongside a threaded shaft. The shaft will be parallel to each other and will be connected with bearings and the pen mount. This setup will allow the pen to mark up the entire page. We will be using a solenoid actuator and MOSFET to connect to the pen, and the solenoid will lift and lower the pen. Our complete setup will utilize a signal microcontroller taking commands from a PC. Our Patterson Gearmotors will require a larger voltage supply than our microcontroller can support, so we will be using the motor drivers with two H-bridges to control to control our motors in the project. 
 
-![Solidworks Model](SideView.png)
+![Solidworks Model](Images/SideView.png)
 
 __Figure 1:__ Back view of Solidworks model of 2.5 DOF Image Plotter Schematic.
 
