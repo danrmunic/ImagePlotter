@@ -6,9 +6,9 @@
 #  @mainpage
 #
 #  @section Software Software Design
-#  Here is our current plan for our code. First We have all our state and how they interact and share varables with each other.<br>
+#  Here is our current plan for our code. First We have all our states and how they interact and share varables with each other.<br>
 #  \image html TaskDiagrams.png "Figure 1: Image Plotter Task Diagram" <br>
-#  Next sections show each States State Transition Diagram
+#  Next sections show each States State Transition Diagram.
 #  @subsection User User Task
 #  \image html FSMUser.png "Figure 2: UserTask State Transition Diagram" <br>
 #  @subsection Controller Controller Task
