@@ -40,6 +40,7 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 ## Documentation
 
 ## Website Link
+* [Image Plotter Website](https://danrmunic.github.io/ImagePlotter/docs/index.html)
 
 #  \image html TaskDiagrams.png "Figure 1: Task Diagram" <br>
 #  @subsection User Task
