@@ -43,7 +43,7 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
 #  \image html Task Diagrams.png "Figure 1: Task Diagram" <br>
 #  @subsection User Task
-# 
+# \image html User Task Diagrams.png "Figure 2: UserTask Diagram" <br>
 #  @subsection Controller Task
 #  
 #  @subsection Encoder Task
