@@ -8,7 +8,7 @@ The device will use a rotating base with two motors mounted on top. One motor wi
 __Figure 1:__ Back view of Solidworks model of 2.5 DOF Image Plotter Schematic.
 
 
-![Solidworks Model](OtherSideView.png)
+![Solidworks Model](Images/OtherSideView.png)
 
 __Figure 2:__ Front view of Solidworks model.
 
