@@ -23,15 +23,16 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 |  2   | Pittperson Gearmotors     | ME405 Tub             |     -     |
 |  1   | Nucleo with Shoe          | ME405 Tub             |     -     |
 |  2   | Black & Red Sharpie&trade | Pre-Owned     |   -   |
-|  2   | 5A Power MOSFETs          | [DigiiKey](https://www.digikey.com/en/products/detail/stmicroelectronics/STN3NF06L/654517?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDaIALAJwDsIAugL6OEBMZIAygCoByAzLwBiABgBsAGQaMgA)        |   $3.80   |
-|  1   | 1/4” Guide Rod 12” Long | [servocity](https://www.servocity.com/0-375-3-8-x-12-00-stainless-steel-precision-shafting/) or ME405 Tub | $5.18 |
-|  1   | 1/4” Threaded Rod 12” Long       | ME405 Tub | - |
-|  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
-|  1   | 2.25” Chair Wheel       | [McMaster](https://www.mcmaster.com/24215T44/) | $2.30 |
+|  1   | Motor Driver 2 H-bridges| ME405 Tub | - |
+|  1   | 5A Power MOSFETs          | [DigiiKey](https://www.digikey.com/en/products/detail/stmicroelectronics/STN3NF06L/654517?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDaIALAJwDsIAugL6OEBMZIAygCoByAzLwBiABgBsAGQaMgA)        |   $3.80   |
 |  1   | Solenoid Actuator        | [Digikey](https://www.digikey.com/en/products/detail/sparkfun-electronics/ROB-11015/6163694) | $4.95 |
-|  1   | Rotating Base       | ME405 Tub | - |
-|  2   | 3/8" Ball Bearing       | [servocity](https://www.servocity.com/3-8-bore-bottom-tapped-pillow-block/) | $12.74 |
-|  2   | 3/8 to 3/8 Shaft Coupler       | [amazon](https://www.amazon.com/Stainless-Steel-Screw-Shaft-Coupler/dp/B00KVNACWC) | $9.98 |
+|  1   | 1/4” Guide Rod 12” Long | ME405 Bin | - |
+|  1   | 1/4” Threaded Rod 12” Long       | ME405 Bin | - |
+|  1   | Rotating Base       | ME405 Bin | - |
+|  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
+|  1   | Bearing Wheel       | Clayton | - |
+|  2   | 1/4" Ball Bearing       | [servocity](https://www.servocity.com/3-8-bore-bottom-tapped-pillow-block/) | $12.74 |
+|  2   | 3/8 to 1/4 Shaft Coupler       | [amazon](https://www.amazon.com/Stainless-Steel-Screw-Shaft-Coupler/dp/B00KVNACWC) | $9.98 |
 |  1   | Solenoid and pen platform | 3D Print |- |
 
 
