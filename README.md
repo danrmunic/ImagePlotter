@@ -31,8 +31,8 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 |  1   | Rotating Base       | ME405 Bin | - |
 |  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
 |  1   | Bearing Wheel       | Clayton | - |
-|  2   | 1/4" Ball Bearing       | [servocity](https://www.servocity.com/3-8-bore-bottom-tapped-pillow-block/) | $12.74 |
-|  2   | 3/8 to 1/4 Shaft Coupler       | [amazon](https://www.amazon.com/Stainless-Steel-Screw-Shaft-Coupler/dp/B00KVNACWC) | $9.98 |
+|  2   | 1/4" Ball Bearing       | [servocity](https://www.servocity.com/1-4-bore-bottom-tapped-pillow-block/) | $14 |
+|  2   | 3/8 to 1/4 Shaft Coupler       | [amazon](https://www.amazon.com/Stainless-Steel-Screw-Shaft-Coupler/dp/B00KVNA50G/ref=sr_1_3?crid=39PDB30GPBVOX&keywords=3%2F8+inch+to+3%2F8+inch+Stainless+Steel+Set+Screw+Shaft+Coupler&qid=1645675919&s=industrial&sprefix=3%2F8+inch+to+3%2F8+inch+stainless+steel+set+screw+shaft+coupler%2Cindustrial%2C110&sr=1-3) | $9.98 |
 |  1   | Solenoid and pen platform | 3D Print |- |
 
 
