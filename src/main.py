@@ -18,6 +18,7 @@ import task_share
 import motor_driver
 import closedLoop
 import Encoder
+import math
 
 # a few globals
 
@@ -71,11 +72,11 @@ def task_motor1 ():
         
         if keyShare.get() == 1:
             encoder1.zero()
-            control1.set_setpoint(20)
+            control1.set_setpoint(motor1_set.get())
             keyShare.put(0)
         elif keyShare.get() == 3:
             encoder1.zero()
-            control1.set_setpoint(20)
+            control1.set_setpoint(motor1_set.get())
         yield (0)
     
 def task_motor2 ():
@@ -114,11 +115,11 @@ def task_motor2 ():
         motor2.set_duty(control2.update(encoder2.read(),10))
         if keyShare.get() == 2:
             encoder2.zero()
-            control2.set_setpoint(20)
+            control2.set_setpoint(motor2_set.get())
             keyShare.put(0)
         elif keyShare.get() == 3:
             encoder2.zero()
-            control2.set_setpoint(20)
+            control2.set_setpoint(motor2_set.get())
             keyShare.put(0)
         yield (0)
 
@@ -127,116 +128,172 @@ def task_logic ():
     contour_index = 0
     point_index = 0
     while True:
+        #check if you've finished the list of contours
         if contour_index <= len(contours):
             contour = contours[contour_index]
-            if point_index <= len(contours):
+            #check if you've finished the current contour
+            if point_index <= len(contour):
+                #Find what the next point is
                 next_point = contour[point_index]
+                
+                #do the math to find what need to be sent to the motors
+                next_point = rectangular_to_polar(next_point)
+                next_point = polar_to_motor(next_point)
+                
+                #send these values to the motors
+                motor1_set = next_point[0]
+                motor2_set = next_point[1]
+                
+                #go to the next point
                 point_index = point_index + 1
+                
+                #Make sure the marker is down while drawing.
+                #This should only transition from Lifted to Dropped when transitioning between contours
+                drop_marker = True
             else:
+                #if the current contour is finished, lift the marker, reset the index
                 point_index = 0
-            contour_index = contour_index + 1
+                drop_marker = False
+                
+                #go to the next contour
+                contour_index = contour_index + 1
         else:
             contour_index = 0
-        yield(0)
-
-
-def task_controller ():
-    #convert rectangular to polar coordinants from a point to control the motors to go to that point
-    #use the encoder position to figure out how far we need to move
-    while True:
-        #convert the point to polar here
-        yield(0)
-        
-    
-    
+            read_file.set(1)
+        yield(0)    
 
 def task_user ():
-    '''!@brief Reads data from USB comm port.
-        @details Checks to see if there is any new inputs from the comm port.
-                Will step motor 1 if 'a' is pressed.
-                Will step motor 2 if 'b' is pressed.
-                Will stop motors and show diagnostics if 'c' is pressed.
-                Will step motor 1 and 2 if 'd' is pressed.
-    '''
-    vcp = pyb.USB_VCP ()
     
     while True:
         yield (0)
-        if vcp.any():
-            command = vcp.read(1)
-            if command == b'a':
-                keyShare.put(1)
-            elif command == b'd':
-                keyShare.put(3)
-            elif command == b'b':
-                keyShare.put(2)
-            elif command == b'c':
-                print("read")
-                keyShare.put(-1)
+        if read_file.get():
+            try:
+                f = open('strokes.txt', 'r')
+            except FileNotFoundError:
+                print("waiting for file strokes.txt...")
+            
+            Lines = file1.readlines()
+ 
+            #go through all the lines to fill the contours list
+            for line in Lines:
+                #create an empty contour
+                contour = []
+                #check if the contour is finished. If it is, add it to contours list and then start a new contour
+                if '}' in line:
+                    contours.append(contour)
+                    contour=[]
+                else:
+                    #use eval to convert string to tuple, then add that point to the contour
+                    point = eval(line)
+                    contour.append(point)
                 
-            print(vcp.read())
+            read_file.set(0)
+            
         
 def task_solenoid ():
-    
+    #control the lifting of the marker
+    pinB3 = pyb.Pib(pyb.Pin.cpu.B3, pyb.Pin.OUT_PP)
     while True:
+        if drop_marker:
+            pinB3.low()
+        else:
+            pinB3.high()
         yield(0)
 
-'''
-def task_encoder ():
-    # encoder 1
-    ## encoder 1 pin B6
-    pinB6 = pyb.Pin.cpu.B6
-    ## encoder 1 pin B7
-    pinB7 = pyb.Pin.cpu.B7
-    ## motor 1 encoder object
-    encoder1 = Encoder.Encoder(pinB6, pinB7, 4)
+def polar_to_motor(point):
+    #input is in the format (r, theta)
+    #motor 2 goes from -10 to 10, which is 90 degrees
+    #motor 1 goes from 0 to 1000, which is 8.75 inches
+    #theta goes from -pi/4 to pi/4
+    #r goes from 0 to sqrt(1000^2+ 500^2) ~~1118
     
-    # encoder 2
-    ## motor 2 encoder pin C6
-    pinC6 = pyb.Pin.cpu.C6
-    ## motor 2 encoder pin C7
-    pinC7 = pyb.Pin.cpu.C7
-    ## motor 2 encoder object
-    encoder2 = Encoder.Encoder(pinC6, pinC7, 8)
+    r = point[0]
+    theta = point[1]
     
-    while True:
-        encoder1.updatePosition()
-        encoder2.updatePosition()
-        point = (encoder1.read(), encoder2.read())
-        encoder_position = polar_to_rectangular(point)
-        yield(0)
-'''
+    #map the values from 0 to 1118 into -900 to 100
+    r = (r * 1000/math.sqrt(1000**2 + 500**2)) - 900
+    
+    #map the values from -pi/4 to pi/4 into -10 to 10
+    theta = (theta * 10) / (math.pi/4)
+    
+    return (r,theta)
 
-def polar_to_rectangular(point):
-    return (0,0)
 
 def rectangular_to_polar(point):
-    return (0,0)
+    #input is in the format (x, y)
+    #the image size should be (727, 1000)
+    x = point[0]
+    y = point[1]
+    
+    #cartesian coordinates before transforming the image (x,y):
+    #                        o
+    #(0,1000)________________(0,0)
+    #        |               |
+    #        |               |
+    #        |               |
+    #        |               |
+    #        |_______________|
+    #(1000,1000)             (1000, 0)
+    #o is the robot aka the reference we will be taking the angle from
+    
+    #cartesian coordinates after transforming the image (newx,newy):
+    #(0,-500)________________(0,-500)
+    #        |               |
+    #        |               |
+    #     o  |               |
+    #        |               |
+    #        |_______________|
+    #(0, 500)                 (1000, 500)
+    
+    #polar coordinates (r, theta)
+    #(500,-pi/4)________________ (1118,arctan(-500,1000))
+    #            |               |
+    #            |               |
+    #         o  |               | (1000, 0)
+    #            |               |
+    #            |_______________|
+    #(500, pi/4)                  (1118, arctan(500/1000))
+    
+    #rotate the point 90 degrees using rotation matrix
+    #newx = cos(pi/2) x + sin(pi/2) y
+    #newy = -sin(pi/2) x + cos(pi/2) y
+    newx = y
+    newy = -x
+    
+    #transform the image to our 'angle reference point' is in the middle
+    newy = newy - (newy/2)
+    
+    #calculate r and theta of the new image
+    theta = math.atan(newy/newx)
+    r = math.sqrt(newx ** 2 + newy ** 2)
+    return (r,theta)
 
 # This code creates a share, a queue, and two tasks, then starts the tasks. The
 # tasks run until somebody presses ENTER, at which time the scheduler stops and
 # printouts show diagnostic information about the tasks, share, and queue.
 if __name__ == "__main__":
     
-    global motor1_duty
-    global motor2_duty 
     global contours 
-    global next_point 
-    global marker_dropped 
-    global encoder_position 
-    global position
     
     contours = []
     
     while True:
         try:
-            print ('\033[2J________Running__LAB03________ \r\n'
-               'Press \"a\" or \"b\" to step motor 1 or 2. Or \"d\" for both'
-               'Press \"c\" to stop and show diagnostics.')
-        
-            keyShare = task_share.Share ('h', thread_protect = False, name = "Share 0")
+            print ('\033[2J________Running________ \r\n')
             
-            num = check_user_input("Select a motor Period:")
+            
+            keyShare = task_share.Share ('h', thread_protect = False, name = "keyShare")
+            
+            encoder_position = task_share.Share ('h', thread_protect = False, name = "encoder")
+            position = task_share.Share ('h', thread_protect = False, name = "position")
+            motor1_set = task_share.Share ('f', thread_protect = False, name = "motor1_set")
+            motor2_set = task_share.Share ('f', thread_protect = False, name = "motor2_set")
+            
+            #booleans
+            drop_marker = task_share.Share ('b', thread_protect = False, name = "drop_marker")
+            read_file = task_share.Share ('b', thread_protect = False, name = "read_file")
+            
+            #num = check_user_input("Select a motor Period:")
             
             # Create the tasks. If trace is enabled for any task, memory will be
             # allocated for state transition tracing, and the application will run out
@@ -255,9 +312,6 @@ if __name__ == "__main__":
             task_logic = cotask.Task (task_logic, name = 'Task_Logic', priority = 1, 
                                  period = 100, profile = True, trace = False)
             
-            task_controller = cotask.Task (task_controller, name = 'Task_Controller', priority = 1, 
-                                 period = 100, profile = True, trace = False)
-            
             task_solenoid = cotask.Task (task_solenoid, name = 'Task_Solenoid', priority = 1, 
                                  period = 100, profile = True, trace = False)
             
@@ -265,9 +319,8 @@ if __name__ == "__main__":
             cotask.task_list.append (task_motor1)
             cotask.task_list.append (task_motor2)
             cotask.task_list.append (task_user)
-            #cotask.task_list.append (task_logic)
-            #cotask.task_list.append (task_controller)
-            #cotask.task_list.append (task_solenoid)
+            cotask.task_list.append (task_logic)
+            cotask.task_list.append (task_solenoid)
             
             # Run the memory garbage collector to ensure memory is as defragmented as
             # possible before the real-time scheduler is started
