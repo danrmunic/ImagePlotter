@@ -56,7 +56,7 @@ def rectangular_to_polar(point):
     #o is the robot aka the reference we will be taking the angle from
     
     #cartesian coordinates after transforming the image (newx,newy):
-    #(0,-500)________________(0,-500)
+    #(0,-500)________________(1000,-500)
     #        |               |
     #        |               |
     #     o  |               |
@@ -146,20 +146,23 @@ def task_motor1 ():
     tolerance = 0.1
     while True:
         
+        motor1.set_duty(control1.update(encoder1.read(),10))
+        motor2.set_duty(control2.update(encoder2.read(),10))
+        encoder1.updatePosition()
+        encoder2.updatePosition()
+        
         if finishedmove == 1:
-            encoder1.updatePosition()
-            motor1.set_duty(control1.update(encoder1.read(),10))
             currpos1 = motor1_set.get()
-            control1.set_setpoint(currpos1)
+            control1.set_setpoint(currpos1)   
             
-            encoder2.updatePosition()        
-            motor2.set_duty(control2.update(encoder2.read(),10))
             currpos2 = motor2_set.get()
             control2.set_setpoint(currpos2)
             
             finishedmove = 0
             print((currpos1, currpos2))
             
+        
+        print("Encoder position: " + str((encoder1.read(), encoder2.read())) )
         #check the encoder  if we're done moving with +- tolerance
         if currpos1 < encoder1.read() + tolerance and currpos1 > encoder1.read() - tolerance  and currpos2 < encoder2.read() + tolerance and currpos2 > encoder2.read() - tolerance:
             finishedmove = 1
@@ -193,11 +196,11 @@ def task_logic ():
                 
                 #Make sure the marker is down while drawing.
                 #This should only transition from Lifted to Dropped when transitioning between contours
-                drop_marker = True
+                drop_marker.put(1)
             else:
                 #if the current contour is finished, lift the marker, reset the index
                 point_index = 0
-                drop_marker = False
+                drop_marker.put(0)
                 
                 #go to the next contour
                 contour_index = contour_index + 1
@@ -239,7 +242,7 @@ def task_user ():
                     contour.append(intpoint[:])
                 
             read_file.put(0)
-            yield (0)
+        yield (0)
             
         
 def task_solenoid ():
@@ -248,7 +251,7 @@ def task_solenoid ():
     #    but I think its more readable this way than putting it inside the logic task
     pinB3 = pyb.Pin(pyb.Pin.cpu.B3, pyb.Pin.OUT_PP)
     while True:
-        if drop_marker:
+        if drop_marker.get():
             pinB3.low()
         else:
             pinB3.high()
@@ -281,6 +284,7 @@ if __name__ == "__main__":
             drop_marker = task_share.Share ('b', thread_protect = False, name = "drop_marker")
             read_file = task_share.Share ('b', thread_protect = False, name = "read_file")
             read_file.put(1)
+            drop_marker.put(0)
             #num = check_user_input("Select a motor Period:")
             
             # Create the tasks. If trace is enabled for any task, memory will be
@@ -326,5 +330,7 @@ if __name__ == "__main__":
             #print ('\r\n')
         except KeyboardInterrupt:
                 break
-    
+            
+    motor1.disable()
+    motor2.disable()
     print('Program Terminating')
