@@ -17,6 +17,16 @@ __Figure 2:__ Front view of Solidworks model.
 
 __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
+## Introduction
+
+## Hardware Design Overview
+
+## Software Design Overview
+
+##
+
+
+
 ## BOM 
 | Qty. | Part                  | Source                | Est. Cost | 
 |:----:|:----------------------|:----------------------|:---------:|
