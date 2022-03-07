@@ -149,13 +149,11 @@ def task_motor1 ():
         if finishedmove == 1:
             encoder1.updatePosition()
             motor1.set_duty(control1.update(encoder1.read(),10))
-            encoder1.zero()
             currpos1 = motor1_set.get()
             control1.set_setpoint(currpos1)
             
             encoder2.updatePosition()        
             motor2.set_duty(control2.update(encoder2.read(),10))
-            encoder2.zero()
             currpos2 = motor2_set.get()
             control2.set_setpoint(currpos2)
             
