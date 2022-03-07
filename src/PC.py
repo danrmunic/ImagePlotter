@@ -1,3 +1,4 @@
+
 '''!
     @file Lab04_PC.py
     @brief Runs PC Code that Communicates with the micro Python Board through the serial board running Lab04 and plots responce.
@@ -10,6 +11,16 @@
 import serial
 import time
 
+def SendNextVal(s_port):
+    '''!@brief
+        @param 
+    '''
+    s_port.reset_input_buffer()
+    if len(NewLines) > 0:
+        s_port.write(str(NewLines.pop(0)).encode("UTF-8") + b'\r\n')
+
+
+
 def write_step(s_port):
     '''!@brief a generator that iterates through writting to the s_port.
         @param Current serial port
@@ -21,22 +32,18 @@ def write_step(s_port):
         
         s_port.reset_output_buffer()
         readVal = s_port.readline().replace(b'\r\n', b'').decode()
-        if ":" in readVal:
-            s_port.reset_input_buffer()
-            s_port.write(input(readVal).encode("UTF-8") + b'\r\n')
-            time.sleep(.1)     
-        elif not (readVal == "" or readVal == '#START#'):
+        if not (readVal == "" or readVal == 'READY'):
             print(readVal)
+
 
 if __name__ == '__main__':
     '''!@brief Communicates with the micro Python Board through the serial board
         @details Opens a spesified seiral port and iterates through writting new motor periods and step inputs.
                  Then plotting it.
     '''
-    COM = 'COM12'
+    COM = 'COM6'
     Speed = 115200
     
-    contours = []
     
     try:
         f = open("strokes.txt", 'r')
@@ -44,26 +51,12 @@ if __name__ == '__main__':
         print("waiting for file strokes.txt...")
             
     Lines = f.readlines()
- 
-    #print("testing")
-    contour = []
-    #go through all the lines to fill the contours list
+    NewLines = []
     for line in Lines:
-        #create an empty contour
-                
-        #check if the contour is finished. If it is, add it to contours list and then start a new contour
-        if '}' in line:
-            contours.append(contour)
-            #print(contours)
-            contour=[]
-        elif '{' in line:
-            continue
-        else:
-            #use eval to convert string to tuple, then add that point to the contour
-            point = eval(line)
-            intpoint = (int(point[0]), int(point[1]))
-            #print(intpoint)
-            contour.append(intpoint[:])
+        NewLines.append(line.strip())
+
+ 
+
     
     readVal = b"hi"    
     
@@ -72,13 +65,11 @@ if __name__ == '__main__':
         s_port.reset_output_buffer()
         while (True):
             try:
-                if readVal == '#START#':
-                    plotCOMData(s_port)
+                if readVal == 'READY':
+                    SendNextVal(s_port)
                     readVal = "hi again!"
                 else:
                     readVal = next(commandCycle)
 
             except KeyboardInterrupt:      
                 break
-
-    

@@ -186,14 +186,14 @@ def task_motor1 ():
             control2.set_setpoint(currpos2)
             
             finishedmove.put(0)
-            print("moving to point" + str((currpos1, currpos2)))
+            #print("moving to point" + str((currpos1, currpos2)))
             
         
         #print("Encoder position: " + str((encoder1.read(), encoder2.read())) )
         #check the encoder if we're done moving with +- tolerance
         if finishedmove.get() == 0 and currpos1 < encoder1.read() + tolerance1 and currpos1 > encoder1.read() - tolerance1 and currpos2 < encoder2.read() + tolerance2 and currpos2 > encoder2.read() - tolerance2:
             finishedmove.put(1)
-            #print("finished_move")
+            print("READY")
             
         yield (0)
   
@@ -217,7 +217,7 @@ def task_logic ():
 
             next_point = polar_to_motor(next_point)
                 
-            print("motor positions: " + str((next_point[0], next_point[1])))
+            #print("motor positions: " + str((next_point[0], next_point[1])))
             #send these values to the motors
             motor1_set.put(next_point[0])
             motor2_set.put(next_point[1])
