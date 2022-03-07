@@ -19,7 +19,15 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
 ## Introduction
 
+We want to make a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC. The code will turn an image into a series of vectors that our system will draw the robot. The device will be intended as a fun activity for casual users. 
+
+
+
+
+
 ## Hardware Design Overview
+
+The hardware of the project will be consisiting of two motors, two rods, a breadboard, a mosfet, a solenoid, a mount and a wooden frame in order to hold the robot. The motors will be in charge of moving the solenoid. One motor will control the the radial distance from the mount while the second motor will control the angular coordinate. This will allow the device to be able to go to all areas of the paper. The two rods will be used as guiding rods for the solenoid to be able to move up and down. The solenoid will be used as to control the pen, whether or not it marks the paper. This will be controlled by in input voltage into a mosfet that will either trigger the solenoid or not. The breadboard is used in otder to be able to provide a surface to connect electrical components. The wooden frame provides support for the entire system.
 
 ## Software Design Overview
 
