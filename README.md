@@ -19,10 +19,7 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
 ## Introduction
 
-We want to make a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC. The code will turn an image into a series of vectors that our system will draw the robot. The device will be intended as a fun activity for casual users. 
-
-
-
+We want to make a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC. The code will turn an image into a series of vectors that our system will draw. The system will be using a radial and angular coordinate system. The device will be intended as a fun activity for casual users. 
 
 
 ## Hardware Design Overview
@@ -31,7 +28,11 @@ The hardware of the project will be consisiting of two motors, two rods, a bread
 
 ## Software Design Overview
 
-##
+## Results Overview
+The system was tested by sending a few pictures of squares as images. We noticed that when the image had short strokes, the machine was able to make precise movements and replicate it onto the paper. However, when there were large, signluar strokes, the machine would have difficulty recreating this image. This might be becaause the machine is working in radial and angular coordinates, so it struglles to be able to make straight lines.
+
+## Expanding on the Process
+In this project, we learned how useful it is to have a greater understanding of various components. The solenoid was extremely helpful in being able to move the sharpie up and down. It was difficult to integrate the entire system into one machine since there are multiple devices to connect with one another. However, when combined, they make a far more efficient machine than previously imagined. The best advice to give to someone who might expand on our current setup, would be to familiarize themselves with each component in order to create the best possible machine.
 
 
 
