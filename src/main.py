@@ -40,12 +40,12 @@ def polar_to_motor(point):
     theta = point[1]
     
     #map the values from 0 to 1118 into -900 to 100
-    r = (r * 1000/math.sqrt(1000**2 + 500**2)) + origin.get()
-    
+    th1 = (r * 1000/math.sqrt(1000**2 + 500**2)) + origin.get() -650
+     
     #map the values from -pi/2 to pi/2 into -10 to 10
-    theta = ((theta) * 10) / (math.pi/2)
+    th2 = ((theta) * 10) / (math.pi/4)
     
-    return (r,theta)
+    return (th1,th2)
 
 
 def rectangular_to_polar(point):
@@ -88,7 +88,7 @@ def rectangular_to_polar(point):
     #newx = cos(pi/2) x + sin(pi/2) y
     #newy = -sin(pi/2) x + cos(pi/2) y
     #Add 600 to newx because of the distance between r=0 and the lever point
-    newx = y + 600
+    newx = y
     newy = -x
     
     #transform the image so our 'angle reference point' is in the middle
@@ -102,6 +102,19 @@ def rectangular_to_polar(point):
         newx = 0.00001
     theta = math.atan(newy/newx)
     r = math.sqrt(newx ** 2 + newy ** 2)
+    
+    rsatLim = [800,1950]
+    if r<rsatLim[0]:
+        r = rsatLim[0]
+    elif r>rsatLim[1]:
+        r = rsatLim[1]
+    
+    thsatLim = [-3.14159/2,3.14159/2]
+    if theta<thsatLim[0]:
+        theta = thsatLim[0]
+    elif theta>thsatLim[1]:
+        theta = thsatLim[1]
+    
     return (r,theta)
 
 
@@ -152,7 +165,7 @@ def task_motor1 ():
     pinC7 = pyb.Pin.cpu.C7
     ## motor 2 encoder object
     encoder2 = Encoder.Encoder(pinC6, pinC7, 8)
-    control2 = closedLoop.ClosedLoop(100,satLim = [-50,50])
+    control2 = closedLoop.ClosedLoop(100,satLim = [-60,60])
     
     switch = Switch(pyb.Pin.board.PC2)
     
@@ -174,9 +187,8 @@ def task_motor1 ():
             motor1_set.put(encoder1.read())
             motor2_set.put(encoder2.read())
             print("Calibrated. Origin: " + str((encoder1.read(), encoder2.read())))
-            #finishedmove.put(1)
+            finishedmove.put(1)
             calibrated.put(1)
-            motor1_set(-500)
 
             
             
@@ -204,8 +216,7 @@ def task_logic ():
     while True:
         
         if finishedmove.get() == 0:
-            yield (0)
-            
+            pass
         else:
             
             ###
@@ -290,24 +301,24 @@ if __name__ == "__main__":
             
             keyShare = task_share.Share ('h', thread_protect = False, name = "keyShare")
 
-            encoder_position = task_share.Share ('h', thread_protect = False, name = "encoder")
-            position = task_share.Share ('h', thread_protect = False, name = "position")
+#             encoder_position = task_share.Share ('h', thread_protect = False, name = "encoder")
+#             position = task_share.Share ('h', thread_protect = False, name = "position")
             #motor1_set = task_share.Queue ('h', 20, thread_protect = False, name = "motor1_set")
             #motor2_set = task_share.Queue ('h', 20, thread_protect = False, name = "motor2_set")
             
             px= task_share.Share ('f', thread_protect = False, name = "px")
             py= task_share.Share ('f', thread_protect = False, name = "py")
             px.put(500)
-            py.put(-600)
+            py.put(800)
             
             origin = task_share.Share ('f', thread_protect = False, name = "origin")
-            origin.put(-2000)
+            origin.put(-3000)
             
             motor1_set = task_share.Share ('f', thread_protect = False, name = "motor1_set")
             motor2_set = task_share.Share ('f', thread_protect = False, name = "motor2_set")
             #booleans
             drop_marker = task_share.Share ('b', thread_protect = False, name = "drop_marker")
-            drop_marker.put(0)
+            drop_marker.put(1)
             
             finishedmove = task_share.Share ('h', thread_protect = False, name = "finishedmoved")
             finishedmove.put(1)
