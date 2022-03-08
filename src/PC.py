@@ -16,6 +16,8 @@ def SendNextVal(s_port):
     '''
     s_port.reset_input_buffer()
     a = str(NewLines.pop(0))
+    if('{' not in NewLines[0] and '}' not in NewLines[0]):
+        NewLines.pop(0)
     print(a)
     s_port.write(a.encode("UTF-8") + b'\r\n')
     
@@ -31,6 +33,7 @@ def write_step(s_port):
         
         s_port.reset_output_buffer()
         readVal = s_port.readline().replace(b'\r\n', b'').decode()
+
         if not (readVal == "" or readVal == 'READY'):
             print(readVal)
 
