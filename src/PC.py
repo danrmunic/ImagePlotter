@@ -48,7 +48,7 @@ if __name__ == '__main__':
     Speed = 115200    
     
     try:
-        f = open("image.txt", 'r')
+        f = open("corcle.txt", 'r')
     except FileNotFoundError:
         print("waiting for file strokes.txt...")
             
