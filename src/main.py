@@ -144,7 +144,7 @@ def task_motor1 ():
     pinB7 = pyb.Pin.cpu.B7
     ## motor 1 encoder object
     encoder1 = Encoder.Encoder(pinB6, pinB7, 4)
-    control1 = closedLoop.ClosedLoop(60)
+    control1 = closedLoop.ClosedLoop(90)
     
     # motor 2
     ## motor 2 timer (5)
@@ -165,15 +165,15 @@ def task_motor1 ():
     pinC7 = pyb.Pin.cpu.C7
     ## motor 2 encoder object
     encoder2 = Encoder.Encoder(pinC6, pinC7, 8)
-    control2 = closedLoop.ClosedLoop(200,satLim = [-60,60])
+    control2 = closedLoop.ClosedLoop(250,satLim = [-60,60])
     
     switch = Switch(pyb.Pin.board.PC2)
     
     #currpos are the positions the motors are currently moving towards (not where they actually are)
     currpos1 = 0
     currpos2 = 0
-    tolerance1 = 5.0
-    tolerance2 = 1.0
+    tolerance1 = 3.0
+    tolerance2 = .5
     while True:
         
         motor1.set_duty(control1.update(encoder1.read(),10))
