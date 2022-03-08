@@ -144,7 +144,7 @@ def task_motor1 ():
     pinB7 = pyb.Pin.cpu.B7
     ## motor 1 encoder object
     encoder1 = Encoder.Encoder(pinB6, pinB7, 4)
-    control1 = closedLoop.ClosedLoop(20)
+    control1 = closedLoop.ClosedLoop(60)
     
     # motor 2
     ## motor 2 timer (5)
@@ -165,14 +165,14 @@ def task_motor1 ():
     pinC7 = pyb.Pin.cpu.C7
     ## motor 2 encoder object
     encoder2 = Encoder.Encoder(pinC6, pinC7, 8)
-    control2 = closedLoop.ClosedLoop(100,satLim = [-60,60])
+    control2 = closedLoop.ClosedLoop(200,satLim = [-60,60])
     
     switch = Switch(pyb.Pin.board.PC2)
     
     #currpos are the positions the motors are currently moving towards (not where they actually are)
     currpos1 = 0
     currpos2 = 0
-    tolerance1 = 3.0
+    tolerance1 = 5.0
     tolerance2 = 1.0
     while True:
         
@@ -207,7 +207,6 @@ def task_motor1 ():
         #check the encoder if we're done moving with +- tolerance
         if finishedmove.get() == 0 and currpos1 < encoder1.read() + tolerance1 and currpos1 > encoder1.read() - tolerance1 and currpos2 < encoder2.read() + tolerance2 and currpos2 > encoder2.read() - tolerance2:
             finishedmove.put(1)
-            print("READY")
             
         yield (0)
   
@@ -243,13 +242,13 @@ def task_user ():
     
     while True:
         if(finishedmove.get() == 1):
-            
+
             if(CommReader.any()):
                 #Reads Most recent Command
                 #point format [float,float]
                 ## Stores the most recent key pressed
                 point = CommReader.readline().decode("UTF-8")
-                
+                CommReader.read()
                 print("Inputting to serial: " + str(point))
 
                 if '}' in point:
@@ -265,8 +264,13 @@ def task_user ():
                         #this is hacky code below, change this once its all working
                         px.put(floatpoint[0])
                         py.put(floatpoint[1])
+#                         ready_for_input(1)
                     except (NameError,SyntaxError) as e:
                         print("Wrong point format")
+            else:     
+#                 if ready_for_input.get():
+                print("READY")
+#                 ready_for_input.put(0)
         yield (0)
             
         
@@ -318,14 +322,16 @@ if __name__ == "__main__":
             motor2_set = task_share.Share ('f', thread_protect = False, name = "motor2_set")
             #booleans
             drop_marker = task_share.Share ('b', thread_protect = False, name = "drop_marker")
-            drop_marker.put(1)
+            drop_marker.put(0)
             
-            finishedmove = task_share.Share ('h', thread_protect = False, name = "finishedmoved")
+            finishedmove = task_share.Share ('b', thread_protect = False, name = "finishedmoved")
             finishedmove.put(1)
             
-            calibrated = task_share.Share ('h', thread_protect = False, name = "calibrated")
+            calibrated = task_share.Share ('b', thread_protect = False, name = "calibrated")
             calibrated.put(0)
             
+            ready_for_input = task_share.Share ('b', thread_protect = False, name = "ready")
+            ready_for_input.put(1)
             #num = check_user_input("Select a motor Period:")
             
             # Create the tasks. If trace is enabled for any task, memory will be

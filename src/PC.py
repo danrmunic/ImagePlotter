@@ -15,7 +15,10 @@ def SendNextVal(s_port):
         @param 
     '''
     s_port.reset_input_buffer()
-    s_port.write(str(NewLines.pop(0)).encode("UTF-8") + b'\r\n')
+    a = str(NewLines.pop(0))
+    print(a)
+    s_port.write(a.encode("UTF-8") + b'\r\n')
+    
 
 def write_step(s_port):
     '''!@brief a generator that iterates through writting to the s_port.
@@ -42,7 +45,7 @@ if __name__ == '__main__':
     Speed = 115200    
     
     try:
-        f = open("strokes.txt", 'r')
+        f = open("image.txt", 'r')
     except FileNotFoundError:
         print("waiting for file strokes.txt...")
             
@@ -52,13 +55,14 @@ if __name__ == '__main__':
         NewLines.append(line.strip())
 
  
-
+    
     
     readVal = b"hi"    
     
     with serial.Serial(COM, Speed,timeout=1) as s_port:
         commandCycle = write_step(s_port)
         s_port.reset_output_buffer()
+        SendNextVal(s_port)
         while (True):
             try:
                 if readVal == 'READY':
