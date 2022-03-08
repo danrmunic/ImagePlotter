@@ -1,3 +1,4 @@
+
 '''!
     @file Lab04_PC.py
     @brief Runs PC Code that Communicates with the micro Python Board through the serial board running Lab04 and plots responce.
@@ -15,8 +16,6 @@ def SendNextVal(s_port):
     '''
     s_port.reset_input_buffer()
     s_port.write(str(NewLines.pop(0)).encode("UTF-8") + b'\r\n')
-
-
 
 def write_step(s_port):
     '''!@brief a generator that iterates through writting to the s_port.
@@ -38,14 +37,14 @@ if __name__ == '__main__':
         @details Opens a spesified seiral port and iterates through writting new motor periods and step inputs.
                  Then plotting it.
     '''
-    COM = 'COM3'
-    Speed = 115200
     
-    f = open("strokes.txt", 'r')
-    # try:
-    #     f = open("strokes.txt", 'r')
-    # except FileNotFound Error:
-    #     print("waiting for file strokes.txt...")
+    COM = 'COM3'
+    Speed = 115200    
+    
+    try:
+        f = open("strokes.txt", 'r')
+    except FileNotFoundError:
+        print("waiting for file strokes.txt...")
             
     Lines = f.readlines()
     NewLines = []

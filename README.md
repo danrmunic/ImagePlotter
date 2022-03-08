@@ -17,6 +17,26 @@ __Figure 2:__ Front view of Solidworks model.
 
 __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
+## Introduction
+
+We want to make a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC. The code will turn an image into a series of vectors that our system will draw. The system will be using a radial and angular coordinate system. The device will be intended as a fun activity for casual users. 
+
+The device will use a rotating base with two motors mounted on top. One motor will spin a wheel to create rotational motion. Another motor will create linear motion that will move the pen linearly alongside a threaded shaft. The shaft will be parallel to each other and will be connected with bearings and the pen mount. This setup will allow the pen to mark up the entire page. We will be using a solenoid actuator and MOSFET to connect to the pen, and the solenoid will lift and lower the pen. Our complete setup will utilize a signal microcontroller taking commands from a PC. Our Patterson Gearmotors will require a larger voltage supply than our microcontroller can support, so we will be using the motor drivers with two H-bridges to control to control our motors in the project.
+
+## Hardware Design Overview
+
+The hardware of the project will be consisiting of two motors, two rods, a breadboard, a mosfet, a solenoid, a mount and a wooden frame in order to hold the robot. The motors will be in charge of moving the solenoid. One motor will control the the radial distance from the mount while the second motor will control the angular coordinate. This will allow the device to be able to go to all areas of the paper. The two rods will be used as guiding rods for the solenoid to be able to move up and down. The solenoid will be used as to control the pen, whether or not it marks the paper. This will be controlled by in input voltage into a mosfet that will either trigger the solenoid or not. The breadboard is used in otder to be able to provide a surface to connect electrical components. The wooden frame provides support for the entire system.
+
+## Software Design Overview
+
+## Results Overview
+The system was tested by sending a few pictures of squares as images. We noticed that when the image had short strokes, the machine was able to make precise movements and replicate it onto the paper. However, when there were large, signluar strokes, the machine would have difficulty recreating this image. This might be becaause the machine is working in radial and angular coordinates, so it struglles to be able to make straight lines.
+
+## Expanding on the Process
+In this project, we learned how useful it is to have a greater understanding of various components. The solenoid was extremely helpful in being able to move the sharpie up and down. It was difficult to integrate the entire system into one machine since there are multiple devices to connect with one another. However, when combined, they make a far more efficient machine than previously imagined. The best advice to give to someone who might expand on our current setup, would be to familiarize themselves with each component in order to create the best possible machine.
+
+
+
 ## BOM 
 | Qty. | Part                  | Source                | Est. Cost | 
 |:----:|:----------------------|:----------------------|:---------:|
