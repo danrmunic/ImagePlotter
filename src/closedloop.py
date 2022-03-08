@@ -75,11 +75,11 @@ class ClosedLoop:
         if(utime.ticks_diff(self.Time(),self.to) < 2000 and self.recording):
             self.times.append(utime.ticks_diff(self.Time(),self.to))
             self.positions.append(read)
-        elif (self.recording):
-            print("#START#")
-            self.print_values()
-            self.recording = False
-            print("#STOP#")
+        #elif (self.recording):
+            #print("#START#")
+            #self.print_values()
+            #self.recording = False
+            #print("#STOP#")
             
         return self.sat(actuation_signal)
                 

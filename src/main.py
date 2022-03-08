@@ -152,7 +152,7 @@ def task_motor1 ():
     pinC7 = pyb.Pin.cpu.C7
     ## motor 2 encoder object
     encoder2 = Encoder.Encoder(pinC6, pinC7, 8)
-    control2 = closedLoop.ClosedLoop(50,satLim = [-50,50])
+    control2 = closedLoop.ClosedLoop(100,satLim = [-50,50])
     
     switch = Switch(pyb.Pin.board.PC2)
     
@@ -174,8 +174,10 @@ def task_motor1 ():
             motor1_set.put(encoder1.read())
             motor2_set.put(encoder2.read())
             print("Calibrated. Origin: " + str((encoder1.read(), encoder2.read())))
-            finishedmove.put(1)
+            #finishedmove.put(1)
             calibrated.put(1)
+            motor1_set(-500)
+
             
             
         if finishedmove.get() == 1:
@@ -186,14 +188,14 @@ def task_motor1 ():
             control2.set_setpoint(currpos2)
             
             finishedmove.put(0)
-            print("moving to point" + str((currpos1, currpos2)))
+            #print("moving to point" + str((currpos1, currpos2)))
             
         
         #print("Encoder position: " + str((encoder1.read(), encoder2.read())) )
         #check the encoder if we're done moving with +- tolerance
         if finishedmove.get() == 0 and currpos1 < encoder1.read() + tolerance1 and currpos1 > encoder1.read() - tolerance1 and currpos2 < encoder2.read() + tolerance2 and currpos2 > encoder2.read() - tolerance2:
             finishedmove.put(1)
-            #print("finished_move")
+            print("READY")
             
         yield (0)
   
@@ -217,7 +219,7 @@ def task_logic ():
 
             next_point = polar_to_motor(next_point)
                 
-            print("motor positions: " + str((next_point[0], next_point[1])))
+            #print("motor positions: " + str((next_point[0], next_point[1])))
             #send these values to the motors
             motor1_set.put(next_point[0])
             motor2_set.put(next_point[1])
@@ -262,6 +264,9 @@ def task_solenoid ():
     #I know this doesn't need to be its own task,
     #    but I think its more readable this way than putting it inside the logic task
     pinB3 = pyb.Pin(pyb.Pin.cpu.B3, pyb.Pin.OUT_PP)
+#     timer = pyb.Timer(2,freq=50)
+#     channel = timer.channel(2,pyb.Timer.PWM,pin=pinB3)
+#     channel.pulse_width_percent(0)
     while True:
         if drop_marker.get() == 1:
             pinB3.low()
@@ -296,7 +301,7 @@ if __name__ == "__main__":
             py.put(-600)
             
             origin = task_share.Share ('f', thread_protect = False, name = "origin")
-            origin.put(-1000)
+            origin.put(-2000)
             
             motor1_set = task_share.Share ('f', thread_protect = False, name = "motor1_set")
             motor2_set = task_share.Share ('f', thread_protect = False, name = "motor2_set")
