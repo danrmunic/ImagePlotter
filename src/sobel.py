@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-#import imageio
+import imageio
 
 #to do: handle high resolution images by downscaling
 
@@ -8,10 +8,11 @@ import numpy as np
 #   contour threshold changes minimum size of contours
 #   high pass threshold changes minimum gradient value- should be higher for higher resolution images
 #   scale factor is how much the image should be downscaled- UNIMPLEMENTED
-CONTOUR_THRESHOLD = 20
+CONTOUR_THRESHOLD = 30
 HIGH_PASS_THRESHOLD = 220
 SCALE_FACTOR = 1
-IMAGE_NAME = "image.png"
+IMAGE_NAME = "Obama.png"
+
 
 #image
 img = cv2.imread(IMAGE_NAME)
@@ -81,7 +82,22 @@ for contour in contours:
 
 
 m,n = img.shape
+skip1 = 0
 for stroke in strokes:
+    #skip the border
+    if skip1 == 0:
+        skip1 = 1
+        continue
+    p1 = float(stroke[0][0])
+    p2 = float(stroke[0][1])
+    p1 = p1 * 1000
+    p2 = p2 * 1000
+    p1 = p1/n
+    p2 = p2/m
+    p1 = p1*8
+    p1 = p1/11
+    print("[" + str(p1-200) + "," + str(p2+800) + "]")
+    print("{")
     print("{")
     for point in stroke:
 	#print(str((point[0], point[1])) + str(m) + " " + str(n))
@@ -96,8 +112,8 @@ for stroke in strokes:
         print("[" + str(p1-200) + "," + str(p2+800) + "]")
 	#print("[" + str(float(point[0])*float((1000/m))*float((8/11))) + "," + str(float(point[1])*(1000/m)) + "]")
     print("}")
-    break
-
+    print("}")
+    
 #remove all black pixels from the image (i.e remove everything but contours)
 height, width, _ = threshold.shape
 for i in range(height):
@@ -122,9 +138,9 @@ for stroke in strokes:
     gif_images.append(temp_img)
     prev_img = temp_img
 
-#with imageio.get_writer("stroke.gif", mode="I") as writer:
-#    for idx, frame in enumerate(gif_images):
-#        writer.append_data(frame)
+with imageio.get_writer("stroke.gif", mode="I") as writer:
+    for idx, frame in enumerate(gif_images):
+        writer.append_data(frame)
 
 #cv2.imwrite("im_bw.png", im_bw)
 #cv2.imwrite("edges_high.png", edges_high)
