@@ -1,5 +1,7 @@
 # ImagePlotter
 
+This README.md introduces the ImagePlotter project. It includes and overviews of the implemented hardware and softwear. A disscussion of the results and what we have learned is also included.
+
 ## Introduction
 
 We created a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC. The code turns an image into a series of points that our system draws. The system will be using a radial and angular coordinate system. The device is intended as a fun activity for casual users. 
