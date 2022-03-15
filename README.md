@@ -38,19 +38,19 @@ The image plotter hardware that is structuarl consists of a support bearing, a w
 
 The motors are in charge of moving the solenoid and pen carrage, which contains the sharpee and solenoid. One motor controls the radial distance by rotating the threaded shaft this pushes the solenoid and pen carrage along the shaft at about motor 1000 radians per about 8 inches of radial movement. The solenoid and pen carrage uses the direct drive shaft and wooden bearings to keep movement stable. The second motor controls the angular coordinate by using direct drive to move the wheel around a fixed rod at the orgin to create the theta angle, 20 radians on the motor is a 90 degree turn. We are also able to control when we lift and drop the pen using a solinoid. This allows the device to be able to draw on all areas of the paper. The solinoid is controlled by a mosfet when it is triggered the mosfet will allow current to flow from 5V to ground. We have a diode in parralel with the solinoid to protect our hardwear. The breadboard is used to provide a surface to connect electrical components. We have a limit switch which is mounted close to our motors. the limit switch allows up to locate the orgin when the solenoid and pen carrage crash into it. The wooden frame is what everything is mounted to and it provides support for the entire system. The support bearing adds another contact point to prevent the wooden frame from tilting. See figure 1 and 2 for hardware models. 
 
-![Hardwear]()
+![Hardwear](Images/HardwareIso.JPG)
 
 __Figure 1:__ Image Plotter Hardware.
 
-![Top View Hardwear](Images/OtherSideView.png)
+![Top View Hardwear](Images/HardwareTopView.JPG)
 
 __Figure 2:__ Top View of Image Plotter Hardware.
 
 Figure 3 shows a close up view of our nucleo and breadboard and shows our wiring layout.
 
-![Nucleo and Breadboard Layout](Images/OtherSideView.png)
+![Nucleo and Breadboard Layout](Images/NucleoAndBreadboard.JPG)
 
-__Figure 2:__ Top View of Image Plotter Hardware.
+__Figure 3:__ Top View of Image Plotter Hardware.
 
 
 
