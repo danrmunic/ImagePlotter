@@ -1,30 +1,42 @@
 # ImagePlotter
+__Authors: John Bennett, Daniel Munic, Rudi Diaz__<br />
+__Date Modified: March 15, 2022__
 
-This README.md introduces the ImagePlotter project. It includes and overviews of the implemented hardware and softwear. A disscussion of the results and what we have learned is also included.
+This README.md introduces the ImagePlotter project, a ME 405 project. It includes and overviews of the implemented hardware and softwear. And a disscussion of the results and what we have learned.
 
 ## Introduction
+We created an imageplotter capable of moving a pen with 2.5 degrees of freedom The robot plots in polar (r,theta) coordinates and is able to turn its operation on and off, by lifting or dropping a pen. We rotate a threaded rod for radial tranlations and use direct drive to move our wheel around a fixed orgin to create the theta angle. A solinoid was used for lifting a pen. We communicate drawing instruction through the serial port from our PC. 
 
-We created a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC. The code turns an image into a series of points that our system draws. The system will be using a radial and angular coordinate system. The device is intended as a fun activity for casual users. 
+The project is intended to be operated by its creators: John Bennett, Daniel Munic, and Rudi Diaz since we have a deeper understanding of the code. But the device is intended for anyone that wants to use our image plotter. We have a file that converts an image into a printable textfile that is able to be interpreted by our code. So if anyone has an image we can print it!
 
-The device uses a rotating base with two motors mounted on top. One motor spins a wheel to create rotational motion. Another motor creates linear motion that moves the pen linearly alongside a threaded shaft. The shafts are parallel to each other and are be connected with bearings and the pen mount. This setup allows the pen to mark up the entire page. We use a solenoid actuator and MOSFET to connect to the pen, and the solenoid lifts and lowers the pen. Our complete setup utilizes a signal microcontroller taking commands from a PC. Our Patterson Gearmotors require a larger voltage supply than our microcontroller can support, so we use the motor drivers with two H-bridges to control our motors in the project.
+The goal of this project was to create any desired image by generating a series of contors and sending individual commands to the robot until the master piece is done. We were able demonstrate that we accomplished this goal by drawing squares, circles and writing the word image.
+
+## Hardware Design Overview
+We created a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC. The code turns an image into a series of points that our system draws. The system will be using a radial and angular coordinate system. The device is intended as a fun activity for casual users.
+
+The hardware of the project consists of two motors, two rods, a breadboard, a mosfet, a solenoid, a mount and a wooden frame in order to hold the robot. The motors are in charge of moving the solenoid. One motor controls the radial distance from the mount while the second motor controls the angular coordinate. This allows the device to be able to go to all areas of the paper. The two rods are used as guiding rods for the solenoid to be able to move up and down. The solenoid is used to control the pen, whether or not it marks the paper. This is controlled by an input voltage into a mosfet that will either trigger the solenoid or not. The breadboard is used in order to provide a surface to connect electrical components. The wooden frame provides support for the entire system.
 
 ![Solidworks Model](Images/SideView.png)
 
-__Figure 1:__ Back view of Solidworks model of 2.5 DOF Image Plotter Schematic.
+__Figure 1:__ Image Plotter Solidworks Model.
 
 
 ![Solidworks Model](Images/OtherSideView.png)
 
-__Figure 2:__ Front view of Solidworks model.
+__Figure 2:__ Front View of Image Plotter Solidworks Model.
 
 
-![Scaled Sketch for Project](https://user-images.githubusercontent.com/97563760/154212086-1d5e8bd8-d7ae-4cbe-9947-79c46431a7ba.png)
+![Scaled Sketch for Project]()
 
-__Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
+__Figure 3:__ Image Plotter Hardware.
 
-## Hardware Design Overview
+![Solidworks Model](Images/OtherSideView.png)
 
-The hardware of the project consists of two motors, two rods, a breadboard, a mosfet, a solenoid, a mount and a wooden frame in order to hold the robot. The motors are in charge of moving the solenoid. One motor controls the radial distance from the mount while the second motor controls the angular coordinate. This allows the device to be able to go to all areas of the paper. The two rods are used as guiding rods for the solenoid to be able to move up and down. The solenoid is used to control the pen, whether or not it marks the paper. This is controlled by an input voltage into a mosfet that will either trigger the solenoid or not. The breadboard is used in order to provide a surface to connect electrical components. The wooden frame provides support for the entire system.
+__Figure 4:__ Front View of Image Plotter Hardware.
+
+The device uses a rotating base with two motors mounted on top. One motor spins a wheel to create rotational motion. Another motor creates linear motion that moves the pen linearly alongside a threaded shaft. The shafts are parallel to each other and are be connected with bearings and the pen mount. This setup allows the pen to mark up the entire page. We use a solenoid actuator and MOSFET to connect to the pen, and the solenoid lifts and lowers the pen. Our complete setup utilizes a signal microcontroller taking commands from a PC. Our Patterson Gearmotors require a larger voltage supply than our microcontroller can support, so we use the motor drivers with two H-bridges to control our motors in the project.
+
+
 
 ### BOM 
 | Qty. | Part                  | Source                | Est. Cost | 
@@ -59,6 +71,8 @@ The system was tested by sending a few pictures of squares as images. We noticed
 
 ## Expanding on the Process
 In this project, we learned how useful it is to have a greater understanding of various components. The solenoid was extremely helpful in being able to move the sharpie up and down. It was difficult to integrate the entire system into one machine since there are multiple devices to connect with one another. However, when combined, they make a far more efficient machine than previously imagined. The best advice to give to someone who might expand on our current setup, would be to familiarize themselves with each component in order to create the best possible machine.
+
+
 
 ## Microcontroller Classes
 
