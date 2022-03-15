@@ -58,26 +58,6 @@ The system was tested by sending a few pictures of squares as images. We noticed
 ## Expanding on the Process
 In this project, we learned how useful it is to have a greater understanding of various components. The solenoid was extremely helpful in being able to move the sharpie up and down. It was difficult to integrate the entire system into one machine since there are multiple devices to connect with one another. However, when combined, they make a far more efficient machine than previously imagined. The best advice to give to someone who might expand on our current setup, would be to familiarize themselves with each component in order to create the best possible machine.
 
-
-
-## BOM 
-| Qty. | Part                  | Source                | Est. Cost | 
-|:----:|:----------------------|:----------------------|:---------:|
-|  2   | Pittperson Gearmotors     | ME405 Tub             |     -     |
-|  1   | Nucleo with Shoe          | ME405 Tub             |     -     |
-|  2   | Black & Red Sharpie&trade | Pre-Owned     |   -   |
-|  1   | Motor Driver 2 H-bridges| ME405 Tub | - |
-|  1   | 5A Power MOSFETs          | [DigiiKey](https://www.digikey.com/en/products/detail/stmicroelectronics/STN3NF06L/654517?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDaIALAJwDsIAugL6OEBMZIAygCoByAzLwBiABgBsAGQaMgA)        |   $3.80   |
-|  1   | Solenoid Actuator        | [Digikey](https://www.digikey.com/en/products/detail/sparkfun-electronics/ROB-11015/6163694) | $4.95 |
-|  1   | 1/4” Guide Rod 12” Long | ME405 Bin | - |
-|  1   | 1/4” Threaded Rod 12” Long       | ME405 Bin | - |
-|  1   | Rotating Base       | ME405 Bin | - |
-|  1   | 3” Rubber Wheel       | [McMaster](https://www.mcmaster.com/wheels/wheels-4/rubber-wheels-7/) | $1.98 |
-|  1   | Bearing Wheel       | Clayton | - |
-|  2   | 1/4" Ball Bearing       | [servocity](https://www.servocity.com/1-4-bore-bottom-tapped-pillow-block/) | $14 |
-|  2   | 3/8 to 1/4 Shaft Coupler       | [amazon](https://www.amazon.com/Stainless-Steel-Screw-Shaft-Coupler/dp/B00KVNA50G/ref=sr_1_3?crid=39PDB30GPBVOX&keywords=3%2F8+inch+to+3%2F8+inch+Stainless+Steel+Set+Screw+Shaft+Coupler&qid=1645675919&s=industrial&sprefix=3%2F8+inch+to+3%2F8+inch+stainless+steel+set+screw+shaft+coupler%2Cindustrial%2C110&sr=1-3) | $9.98 |
-|  1   | Solenoid and pen platform | 3D Print |- |
-
 ## Microcontroller Classes
 
 * [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py)
