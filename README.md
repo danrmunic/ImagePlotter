@@ -12,25 +12,7 @@ The project is intended to be operated by its creators: John Bennett, Daniel Mun
 The goal of this project was to create any desired image by generating a series of contors and sending individual commands to the robot until the master piece is done. We were able demonstrate that we accomplished this goal by drawing squares, circles and writing the word image.
 
 ## Hardware Design Overview
-
-
-
-__The image plotter hardware that is structuarl consists of a support bearing, a wooden bearings, a wooden frame, a wooden leg for bearing, and a rod at the orgin. The image plotter hardware that is non-structuarl consists of two Pittperson DC motors, a threaded rods, a direct drive shaft connected to a wheel, a sharpee, a breadboard, a 5A mosfet, a solenoid, a nucleo with a shoe, a 2 H-bridge motor driver, a limit switch, and a solenoid and pen carrage. For a full list of our hardware see the BOM below
-
-The motors are in charge of moving the solenoid and pen carrage, which contains the sharpee and solenoid. One motor controls the radial distance by rotating the threaded shaft this pushes the solenoid and pen carrage along the shaft at about motor 1000 radians per about 8 inches of radial movement. The solenoid and pen carrage uses the direct drive shaft and wooden bearings to keep movement stable. The second motor controls the angular coordinate by using direct drive to move the wheel around a fixed rod at the orgin to create the theta angle, 20 radians on the motor is a 90 degree turn. We are also able to control when we lift and drop the pen using a solinoid. This allows the device to be able to draw on all areas of the paper. The solinoid is controlled by a mosfet when it is triggered the mosfet will allow current to flow from 5V to ground. We have a diode in parralel with the solinoid to protect our hardwear. The breadboard is used to provide a surface to connect electrical components. We have a limit switch for locating the orgin when the solenoid and pen carrage crash into it. The wooden frame is what everything is mounted to and it provides support for the entire system. The support bearing adds another contact point to prevent the wooden frame from tilting. See figure 1 and 2 for hardware models. 
-
-
-![Hardwear Model]()
-
-__Figure 1:__ Image Plotter Hardware.
-
-![Hardwear Model](Images/OtherSideView.png)
-
-__Figure 2:__ Front View of Image Plotter Hardware.
-
-
-
-
+The image plotter hardware that is structuarl consists of a support bearing, a wooden bearings, a wooden frame, a wooden leg for bearing, and a rod at the orgin. The image plotter hardware that is non-structuarl consists of two Pittperson DC motors, a threaded rods, a direct drive shaft connected to a wheel, a sharpee, a breadboard, a 5A mosfet, a solenoid, a nucleo with a shoe, a 2 H-bridge motor driver, a limit switch, and a solenoid and pen carrage. For a full list of our hardware see the BOM below
 
 ### BOM 
 | Qty. | Part                  | Source                | Est. Cost | 
@@ -53,6 +35,27 @@ __Figure 2:__ Front View of Image Plotter Hardware.
 |  1   | Wooden Wheel Leg          | Scrap Wood Bin        | - |
 |  1   | Rotating Rod at Orgin     | ME405 Bin             | - |
 |  1   | Solenoid and pen platform Carrage | 3D Print      | - |
+
+The motors are in charge of moving the solenoid and pen carrage, which contains the sharpee and solenoid. One motor controls the radial distance by rotating the threaded shaft this pushes the solenoid and pen carrage along the shaft at about motor 1000 radians per about 8 inches of radial movement. The solenoid and pen carrage uses the direct drive shaft and wooden bearings to keep movement stable. The second motor controls the angular coordinate by using direct drive to move the wheel around a fixed rod at the orgin to create the theta angle, 20 radians on the motor is a 90 degree turn. We are also able to control when we lift and drop the pen using a solinoid. This allows the device to be able to draw on all areas of the paper. The solinoid is controlled by a mosfet when it is triggered the mosfet will allow current to flow from 5V to ground. We have a diode in parralel with the solinoid to protect our hardwear. The breadboard is used to provide a surface to connect electrical components. We have a limit switch which is mounted close to our motors. the limit switch allows up to locate the orgin when the solenoid and pen carrage crash into it. The wooden frame is what everything is mounted to and it provides support for the entire system. The support bearing adds another contact point to prevent the wooden frame from tilting. See figure 1 and 2 for hardware models. 
+
+![Hardwear]()
+
+__Figure 1:__ Image Plotter Hardware.
+
+![Top View Hardwear](Images/OtherSideView.png)
+
+__Figure 2:__ Top View of Image Plotter Hardware.
+
+Figure 3 shows a close up view of our nucleo and breadboard and shows our wiring layout.
+
+![Nucleo and Breadboard Layout](Images/OtherSideView.png)
+
+__Figure 2:__ Top View of Image Plotter Hardware.
+
+
+
+
+
 
 ## Software Design Overview
 The software is designed using a number of generators which operate as tasks scheduled in [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py). The motor task sends the desired position to the motors using a [motor_driver](https://github.com/danrmunic/ImagePlotter/blob/main/src/motor_driver.py) object and [ClosedLoop](https://github.com/danrmunic/ImagePlotter/blob/main/src/closedloop.py) object, as well as receiving the motor position using an [Encoder](https://github.com/danrmunic/ImagePlotter/blob/main/src/Encoder.py) object to check if a movement is finished. The user task recieves points from the serial port which are sent from the computer in [PC.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/PC.py) (and generated in [sobel.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/sobel.py)). The logic task does the math to convert those points from rectangular coordinates to values which can be sent to the motors in the polar coordinate system. Finally, the Solenoid task moves the pen up and down while drawing based on input from the computer.  
