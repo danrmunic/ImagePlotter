@@ -11,8 +11,8 @@
 import serial
 
 def SendNextVal(s_port):
-    '''!@brief
-        @param 
+    '''!@brief a function that prepares to send the next value into the serial port
+        @param Current serial port
     '''
     s_port.reset_input_buffer()
     a = str(NewLines.pop(0))
