@@ -24,6 +24,28 @@ __Figure 3:__ Version 1 of 2.5 DOF Image Plotter Schematic project.
 
 The hardware of the project consists of two motors, two rods, a breadboard, a mosfet, a solenoid, a mount and a wooden frame in order to hold the robot. The motors are in charge of moving the solenoid. One motor controls the radial distance from the mount while the second motor controls the angular coordinate. This allows the device to be able to go to all areas of the paper. The two rods are used as guiding rods for the solenoid to be able to move up and down. The solenoid is used to control the pen, whether or not it marks the paper. This is controlled by an input voltage into a mosfet that will either trigger the solenoid or not. The breadboard is used in order to provide a surface to connect electrical components. The wooden frame provides support for the entire system.
 
+### BOM 
+| Qty. | Part                  | Source                | Est. Cost | 
+|:----:|:----------------------|:----------------------|:---------:|
+|  2   | Pittperson Gearmotors     | ME405 Tub             |     -     |
+|  1   | Nucleo with Shoe          | ME405 Tub             |     -     |
+|  2   | Black & Red Sharpie&trade | Pre-Owned     |   -   |
+|  1   | Motor Driver 2 H-bridges| ME405 Tub | - |
+|  1   | 5A Power MOSFETs          | [DigiiKey](https://www.digikey.com/en/products/detail/stmicroelectronics/STN3NF06L/654517?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDaIALAJwDsIAugL6OEBMZIAygCoByAzLwBiABgBsAGQaMgA)        |   $3.80   |
+|  1   | Solenoid Actuator        | [Digikey](https://www.digikey.com/en/products/detail/sparkfun-electronics/ROB-11015/6163694) | $4.95 |
+|  1   | Limit Switch        | Gift | - |
+|  1   | 1/4” Guide Rod 12” Long | ME405 Bin | - |
+|  1   | 1/4” Threaded Rod 12” Long       | ME405 Bin | - |
+|  1   | Rotating Base       | ME405 Bin | - |
+|  1   | 3” Rubber Wheel       | ME405 Bin | - |
+|  1   | Bearing Wheel       | Clayton | - |
+|  1   | Wooden Bearings       | Scrap Wood Bin | - |
+|  1   | Wooden Support Structure       | Scrap Wood Bin | - |
+|  1   | Wooden Wheel Leg       | Scrap Wood Bin | - |
+|  1   | Rotating Swivel Rod       | ME405 Bin | - |
+|  2   | 3/8 to 1/4 Shaft Coupler       | [amazon](https://www.amazon.com/Stainless-Steel-Screw-Shaft-Coupler/dp/B00KVNA50G/ref=sr_1_3?crid=39PDB30GPBVOX&keywords=3%2F8+inch+to+3%2F8+inch+Stainless+Steel+Set+Screw+Shaft+Coupler&qid=1645675919&s=industrial&sprefix=3%2F8+inch+to+3%2F8+inch+stainless+steel+set+screw+shaft+coupler%2Cindustrial%2C110&sr=1-3) | $9.98 |
+|  1   | Solenoid and pen platform Carrage | 3D Print | - |
+
 ## Software Design Overview
 The software is designed using a number of generators which operate as tasks scheduled in [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py). The motor task sends the desired position to the motors using a [motor_driver](https://github.com/danrmunic/ImagePlotter/blob/main/src/motor_driver.py) object and [ClosedLoop](https://github.com/danrmunic/ImagePlotter/blob/main/src/closedloop.py) object, as well as receiving the motor position using an [Encoder](https://github.com/danrmunic/ImagePlotter/blob/main/src/Encoder.py) object to check if a movement is finished. The user task recieves points from the serial port which are sent from the computer in [PC.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/PC.py) (and generated in [sobel.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/sobel.py)). The logic task does the math to convert those points from rectangular coordinates to values which can be sent to the motors in the polar coordinate system. Finally, the Solenoid task moves the pen up and down while drawing based on input from the computer.  
 
