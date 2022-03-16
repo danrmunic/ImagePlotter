@@ -62,7 +62,21 @@ Variables are shared between tasks using Shares and Queues in [task_share.py](ht
 ## Results Overview
 The system was tested by sending a few pictures of squares as images. We noticed that when the image had short strokes, the machine was able to make precise movements and replicate it onto the paper. However, when there were large, singular strokes, the machine would have difficulty recreating this line. This might be becaause the machine is working in radial and angular coordinates, so it struggles to be able to make straight lines. As we progressed with the project, we were able to change the parameters of the system in order to get the best results. We had the system draw three figures. The first was a simple rectangle picture shown in figure 4. 
 
+![Screen Shot 2022-03-15 at 5 07 27 PM](https://user-images.githubusercontent.com/97563760/158492037-c5d4670c-e1ba-402b-9508-dbc4c1ef846e.png)
 __Figure 4:__ Png Image of a Rectangle.
+
+The drawing our system replicated is shown in figure 5. As you can see, the image is not a perfect copy of the image in figure 4, this is due to the fact that due to the machine's coordinate system being cylidrical. This allowed for slight discrepanies as the machine did it's best to copy the image but was unable to make perfect lines. However, the results are still pretty amazing as the image is easily recognizable to the original image.
+
+__Figure 5:__ System's Drawing of a Rectangle.
+
+
+__Figure 6:__ Png Image of the Word Image.
+
+
+__Figure 7:__ System's Drawing of the Word Image.
+
+
+
 
 
 ## Expanding on the Process
