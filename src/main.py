@@ -26,7 +26,9 @@ class Switch:
     '''
     def __init__ (self, inpin):
         '''!@brief Initializes switch object.
+            @param pin used for switch
         '''
+        ## pin object
         self.pinSwitch = pyb.Pin (inpin, pyb.Pin.IN, pyb.Pin.PULL_UP)
     def state(self):
         '''!@brief Read Status of switch
