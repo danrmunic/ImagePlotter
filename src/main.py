@@ -30,6 +30,13 @@ class Switch:
         return 0
 
 def polar_to_motor(point):
+    '''!@brief function that converts our point into a value acceptable for the motors.
+        @details This function takes our two points, which are in the (R,theta) axis and
+        maps these values into a certain region. The conversion is done so that the motors
+        don't overextend and cause the machine to push pass its limits.
+        @param point is the position of the motors in an (R,theta) axis
+    '''        
+    
     #input is in the format (r, theta)
     #motor 2 goes from -10 to 10, which is 90 degrees
     #motor 1 goes from 0 to 1000, which is 8.75 inches
@@ -49,6 +56,15 @@ def polar_to_motor(point):
 
 
 def rectangular_to_polar(point):
+    '''!@brief function that converts our point int cylindrical system.
+        @details This function takes our two points, which are in the XY axis and
+        convert these position into a cyldrical coordinate system since our machine moves
+        by theta or radial position. The conversion is by the equations, and then returns
+        two values, a radius and theta
+        @param point is the position of the motors in an (X,Y) axis
+    '''       
+    
+    
     #input is in the format (x, y)
     #the image size should be (727, 1000)
     x = point[0]
@@ -211,7 +227,11 @@ def task_motor1 ():
         yield (0)
   
 def task_logic ():
-    
+    '''!@brief function that moves between the states.
+        @details This function takes the location of the current position. It then converts
+        this position from rectangular coordiantes into cylindrical. It then sends these values
+        to the motors so that it can move the position of the pen.
+    '''       
     while True:
         
         if finishedmove.get() == 0:
@@ -237,6 +257,12 @@ def task_logic ():
         yield(0)    
 
 def task_user ():
+    '''!@brief Function that reads a picture
+        @details Function that reads a file. If there is something in the file,
+        the function produces a list of contours out of it. This lists is what
+        is later used as points for the motors to move to.
+    '''        
+    
     #Reads a file, makes the list of contours out of that
     CommReader = pyb.USB_VCP()
     
@@ -275,7 +301,14 @@ def task_user ():
             
         
 def task_solenoid ():
-    #Control the lifting of the marker
+    '''!@brief functun that controls the solenoid.
+        @details Everytime this function is clled, it eiher moves the solenoid back into
+        its original posittion or shrinks it. This allows the machine to decide when to write
+        on the paper and when not to.
+    '''       
+   
+   
+   #Control the lifting of the marker
     #I know this doesn't need to be its own task,
     #    but I think its more readable this way than putting it inside the logic task
     pinB3 = pyb.Pin(pyb.Pin.cpu.B3, pyb.Pin.OUT_PP)
