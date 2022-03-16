@@ -11,13 +11,11 @@
 import serial
 
 def SendNextVal(s_port):
-    '''!@brief
-        @param 
+    '''!@brief a function that prepares to send the next value into the serial port
+        @param Current serial port
     '''
     s_port.reset_input_buffer()
     a = str(NewLines.pop(0))
-    if('{' not in NewLines[0] and '}' not in NewLines[0]):
-        NewLines.pop(0)
     print(a)
     s_port.write(a.encode("UTF-8") + b'\r\n')
     
@@ -48,7 +46,7 @@ if __name__ == '__main__':
     Speed = 115200    
     
     try:
-        f = open("corcle.txt", 'r')
+        f = open("obama.txt", 'r')
     except FileNotFoundError:
         print("waiting for file strokes.txt...")
             

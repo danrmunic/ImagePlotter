@@ -165,7 +165,7 @@ def task_motor1 ():
     pinC7 = pyb.Pin.cpu.C7
     ## motor 2 encoder object
     encoder2 = Encoder.Encoder(pinC6, pinC7, 8)
-    control2 = closedLoop.ClosedLoop(250,satLim = [-60,60])
+    control2 = closedLoop.ClosedLoop(200,satLim = [-60,60])
     
     switch = Switch(pyb.Pin.board.PC2)
     
@@ -173,7 +173,7 @@ def task_motor1 ():
     currpos1 = 0
     currpos2 = 0
     tolerance1 = 3.0
-    tolerance2 = .5
+    tolerance2 = 1
     while True:
         
         motor1.set_duty(control1.update(encoder1.read(),10))
