@@ -30,7 +30,7 @@ class Switch:
         return 0
 
 def polar_to_motor(point):
-    '''!@brief function that converts our point into
+    '''!@brief function that converts our point into a value acceptable for the motors.
         @details This function takes our two points, which are in the (R,theta) axis and
         maps these values into a certain region. The conversion is done so that the motors
         don't overextend and cause the machine to push pass its limits.
