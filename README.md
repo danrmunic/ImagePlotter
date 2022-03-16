@@ -60,7 +60,10 @@ The motor task sends both motors to the desired position using a [motor_driver](
 Variables are shared between tasks using Shares and Queues in [task_share.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/task_share.py)
 
 ## Results Overview
-The system was tested by sending a few pictures of squares as images. We noticed that when the image had short strokes, the machine was able to make precise movements and replicate it onto the paper. However, when there were large, signluar strokes, the machine would have difficulty recreating this image. This might be becaause the machine is working in radial and angular coordinates, so it struglles to be able to make straight lines.
+The system was tested by sending a few pictures of squares as images. We noticed that when the image had short strokes, the machine was able to make precise movements and replicate it onto the paper. However, when there were large, singular strokes, the machine would have difficulty recreating this line. This might be becaause the machine is working in radial and angular coordinates, so it struggles to be able to make straight lines. As we progressed with the project, we were able to change the parameters of the system in order to get the best results. We had the system draw three figures. The first was a simple rectangle picture shown in figure 4. 
+
+__Figure 4:__ Png Image of a Rectangle.
+
 
 ## Expanding on the Process
 In this project, we learned how useful it is to have a greater understanding of various components. The solenoid was extremely helpful in being able to move the sharpie up and down. It was difficult to integrate the entire system into one machine since there are multiple devices to connect with one another. However, when combined, they make a far more efficient machine than previously imagined. The best advice to give to someone who might expand on our current setup, would be to familiarize themselves with each component in order to create the best possible machine.
