@@ -1,11 +1,11 @@
 """!
     @file main.py
-    @details Runs main logic and loops through tasks
-    @details This file contains a program that runs 6 tasks
+    @brief Runs main logic of the image plotter and loops through tasks
+    @details The goal of main.py is to be able to lot between point that were sent over serial. This file contains a program that runs through 3 tasks User task, motor task and a solinoid task. We use cotask to schedule each task.  
     @author Rodi Diaz
     @author Daniel Munic
     @author John Bennett
-    @date March 7, 2022   
+    @date March 15, 2022   
 """
 
 import gc
@@ -22,9 +22,15 @@ import math
 #ORIGIN = -1000
 
 class Switch:
+    '''!@brief A Switch class used to read the status of a switch.
+    '''
     def __init__ (self, inpin):
+        '''!@brief Initializes switch object.
+        '''
         self.pinSwitch = pyb.Pin (inpin, pyb.Pin.IN, pyb.Pin.PULL_UP)
     def state(self):
+        '''!@brief Read Status of switch
+        '''
         if self.pinSwitch.value()==1:
             return 1
         return 0
@@ -35,8 +41,7 @@ def polar_to_motor(point):
         maps these values into a certain region. The conversion is done so that the motors
         don't overextend and cause the machine to push pass its limits.
         @param point is the position of the motors in an (R,theta) axis
-    '''        
-    
+    '''     
     #input is in the format (r, theta)
     #motor 2 goes from -10 to 10, which is 90 degrees
     #motor 1 goes from 0 to 1000, which is 8.75 inches
@@ -62,9 +67,7 @@ def rectangular_to_polar(point):
         by theta or radial position. The conversion is by the equations, and then returns
         two values, a radius and theta
         @param point is the position of the motors in an (X,Y) axis
-    '''       
-    
-    
+    '''    
     #input is in the format (x, y)
     #the image size should be (727, 1000)
     x = point[0]
@@ -133,14 +136,33 @@ def rectangular_to_polar(point):
     
     return (r,theta)
 
+def convert_logic (px,py):
+    '''!@brief function that moves between the states.
+        @details This function takes the location of the current position. It then converts
+        this position from rectangular coordiantes into cylindrical. It then sends these values
+        to the motors so that it can move the position of the pen.
+        @param px is the rectangular coordinate x
+        @param py is the rectangular coordinate y
+        @return nextpoint is a tupil containing the motor output
+    '''   
+    next_point = (px, py)
+        
+    #do the math to find what need to be sent to the motors
+    next_point = rectangular_to_polar(next_point)
 
-def task_motor1 ():
-    '''!@brief Initializes and creates a motor object in order to move motor 1. 
-        @details Creates timer channels that will be used specific to each motor channel to control motor function.
-                Creates varriables that will be the motors pins as well as the encoder's pins.
-                Creates a closed loop controller with a Kp of 50
-                Using the encoder, and closed loop controller, update the position of the
-                motor in regular intervals of 10ms until it reaches its final position.
+    next_point = polar_to_motor(next_point)
+        
+    #send these values to the motors
+    return next_point
+
+
+def task_motor ():
+    '''!@brief Initializes and controls two motor to move in olar coordinates.
+        @details The motors are first initialized, which involves creating two motor driver, two encoder, and two closed loop controller objects and a switch object.
+                The rectangular coordinates are converted to polar and sent to the motor drivers.
+                Once the encoder reads that the motors have reached the positions they're supposed to be at,
+                the task outputs that the move is finished so the User Task can read the next point. We use a switch to calibrate our motors.
+#  
     '''
     ## motor 1 timer (3)
     tim3 = pyb.Timer(3, freq = 20000)
@@ -160,6 +182,7 @@ def task_motor1 ():
     pinB7 = pyb.Pin.cpu.B7
     ## motor 1 encoder object
     encoder1 = Encoder.Encoder(pinB6, pinB7, 4)
+    ## motor 1 controler object
     control1 = closedLoop.ClosedLoop(90)
     
     # motor 2
@@ -181,9 +204,12 @@ def task_motor1 ():
     pinC7 = pyb.Pin.cpu.C7
     ## motor 2 encoder object
     encoder2 = Encoder.Encoder(pinC6, pinC7, 8)
+    ## motor 2 controler object
     control2 = closedLoop.ClosedLoop(200,satLim = [-60,60])
-    
+    ## switch object
     switch = Switch(pyb.Pin.board.PC2)
+    
+    calibrated = 0
     
     #currpos are the positions the motors are currently moving towards (not where they actually are)
     currpos1 = 0
@@ -198,71 +224,33 @@ def task_motor1 ():
         encoder2.updatePosition()
         
         #for calibration
-        if switch.state() == 1 and calibrated.get() == 0:
+        if switch.state() == 1 and calibrated == 0:
             origin.put(encoder1.read())
-            motor1_set.put(encoder1.read())
-            motor2_set.put(encoder2.read())
             print("Calibrated. Origin: " + str((encoder1.read(), encoder2.read())))
             finishedmove.put(1)
-            calibrated.put(1)
+            calibrated = 1
 
             
             
         if finishedmove.get() == 1:
-            currpos1 = motor1_set.get()
-            control1.set_setpoint(currpos1)   
+            (currpos1, currpos2) = convert_logic (px.get(),px.get())
             
-            currpos2 = motor2_set.get()
+            control1.set_setpoint(currpos1)   
             control2.set_setpoint(currpos2)
             
             finishedmove.put(0)
-            #print("moving to point" + str((currpos1, currpos2)))
-            
-        
-        #print("Encoder position: " + str((encoder1.read(), encoder2.read())) )
+
         #check the encoder if we're done moving with +- tolerance
         if finishedmove.get() == 0 and currpos1 < encoder1.read() + tolerance1 and currpos1 > encoder1.read() - tolerance1 and currpos2 < encoder2.read() + tolerance2 and currpos2 > encoder2.read() - tolerance2:
             finishedmove.put(1)
             
         yield (0)
-  
-def task_logic ():
-    '''!@brief function that moves between the states.
-        @details This function takes the location of the current position. It then converts
-        this position from rectangular coordiantes into cylindrical. It then sends these values
-        to the motors so that it can move the position of the pen.
-    '''       
-    while True:
-        
-        if finishedmove.get() == 0:
-            pass
-        else:
-            
-            ###
-            next_point = (px.get(), py.get())
-            ###
-            #print("rectangular positions: " + str((next_point[0], next_point[1])))
-                
-            #do the math to find what need to be sent to the motors
-            next_point = rectangular_to_polar(next_point)
-            #print("polar positions: " + str((next_point[0], next_point[1])))
-
-            next_point = polar_to_motor(next_point)
-                
-            #print("motor positions: " + str((next_point[0], next_point[1])))
-            #send these values to the motors
-            motor1_set.put(next_point[0])
-            motor2_set.put(next_point[1])
-        
-        yield(0)    
 
 def task_user ():
-    '''!@brief Function that reads a picture
-        @details Function that reads a file. If there is something in the file,
-        the function produces a list of contours out of it. This lists is what
-        is later used as points for the motors to move to.
-    '''        
-    
+    '''!@brief Task that reads user inputs 
+        @details Function that reads user inputs. If the user inputs a piont then the px and py will be updated.
+                 If there is a { then the soliniod will raise. If there is a } then the soliniod will drop.
+    '''       
     #Reads a file, makes the list of contours out of that
     CommReader = pyb.USB_VCP()
     
@@ -290,25 +278,21 @@ def task_user ():
                         #this is hacky code below, change this once its all working
                         px.put(floatpoint[0])
                         py.put(floatpoint[1])
-#                         ready_for_input(1)
                     except (NameError,SyntaxError) as e:
                         print("Wrong point format")
             else:     
-#                 if ready_for_input.get():
+
                 print("READY")
-#                 ready_for_input.put(0)
         yield (0)
             
         
 def task_solenoid ():
-    '''!@brief functun that controls the solenoid.
-        @details Everytime this function is clled, it eiher moves the solenoid back into
+    '''!@brief task that controls the solenoid.
+        @details Everytime this function is called, it eiher moves the solenoid back into
         its original posittion or shrinks it. This allows the machine to decide when to write
         on the paper and when not to.
-    '''       
-   
-   
-   #Control the lifting of the marker
+    '''    
+    #Control the lifting of the marker
     #I know this doesn't need to be its own task,
     #    but I think its more readable this way than putting it inside the logic task
     pinB3 = pyb.Pin(pyb.Pin.cpu.B3, pyb.Pin.OUT_PP)
@@ -336,50 +320,37 @@ if __name__ == "__main__":
             print ('\033[2J________Running________ \r\n')
             
             
-            keyShare = task_share.Share ('h', thread_protect = False, name = "keyShare")
-
-#             encoder_position = task_share.Share ('h', thread_protect = False, name = "encoder")
-#             position = task_share.Share ('h', thread_protect = False, name = "position")
-            #motor1_set = task_share.Queue ('h', 20, thread_protect = False, name = "motor1_set")
-            #motor2_set = task_share.Queue ('h', 20, thread_protect = False, name = "motor2_set")
-            
+            ## px rectangular coordinate x read from set by user and read by motor task
             px= task_share.Share ('f', thread_protect = False, name = "px")
+            ## py rectangular coordinate y read from set by user and read by motor task
             py= task_share.Share ('f', thread_protect = False, name = "py")
             px.put(500)
             py.put(800)
             
+            ## orgin used to correct our encoder values so that we can find the orgin of the coordinate system 
             origin = task_share.Share ('f', thread_protect = False, name = "origin")
             origin.put(-3000)
             
-            motor1_set = task_share.Share ('f', thread_protect = False, name = "motor1_set")
-            motor2_set = task_share.Share ('f', thread_protect = False, name = "motor2_set")
-            #booleans
+            ## drop_marker booleans for when to rais and lower the marker
             drop_marker = task_share.Share ('b', thread_protect = False, name = "drop_marker")
             drop_marker.put(0)
             
+            ## finishedmove booleans for the motor is done moving
             finishedmove = task_share.Share ('b', thread_protect = False, name = "finishedmoved")
             finishedmove.put(1)
-            
-            calibrated = task_share.Share ('b', thread_protect = False, name = "calibrated")
-            calibrated.put(0)
-            
-            ready_for_input = task_share.Share ('b', thread_protect = False, name = "ready")
-            ready_for_input.put(1)
-            #num = check_user_input("Select a motor Period:")
-            
+                        
             # Create the tasks. If trace is enabled for any task, memory will be
             # allocated for state transition tracing, and the application will run out
             # of memory after a while and quit. Therefore, use tracing only for 
             # debugging and set trace to False when it's not needed
+            
             ## Creates motor1 task
-            task_motor1 = cotask.Task (task_motor1, name = 'Task_Motor1', priority = 1, 
+            task_motor = cotask.Task (task_motor, name = 'Task_Motor', priority = 1, 
                              period = 40, profile = True, trace = False)
             ## Creates user task
             task_user = cotask.Task (task_user, name = 'Task_User', priority = 1, 
                                  period = 100, profile = True, trace = False)
-            ## Creates logic task
-            task_logic = cotask.Task (task_logic, name = 'Task_Logic', priority = 1, 
-                                 period = 100, profile = True, trace = False)
+            
             ## Creates solenoid Task
             task_solenoid = cotask.Task (task_solenoid, name = 'Task_Solenoid', priority = 1, 
                                  period = 100, profile = True, trace = False)
@@ -387,9 +358,8 @@ if __name__ == "__main__":
             
             # Add all the above tasks to the task list
             cotask.task_list = cotask.TaskList()
-            cotask.task_list.append (task_motor1)
+            cotask.task_list.append (task_motor)
             cotask.task_list.append (task_user)
-            cotask.task_list.append (task_logic)
             cotask.task_list.append (task_solenoid)
             
             # Run the memory garbage collector to ensure memory is as defragmented as
@@ -398,10 +368,8 @@ if __name__ == "__main__":
             
             # Run the scheduler with the chosen scheduling algorithm. Quit if any 
             # character is received through the serial port
-            while keyShare.get() != -1:
+            while True:
                 cotask.task_list.pri_sched ()
-            
-            keyShare.put(2318008)
             
             # Print a table of task data and a table of shared information data
             #print ('\n' + str (cotask.task_list))
