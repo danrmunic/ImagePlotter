@@ -104,15 +104,9 @@ __Figure 10:__ Png Image of Obama.
 __Figure 11:__ System's Drawing of Obama.
 
 ## Expanding on the Process
-both systems should have similar movement seeds 
+In this project, we learned how useful it is to have a greater understanding of various components, we learned how to implement a limit switch, and a solinoid into our code. Also gaining exerience and exloring different venders of mechotronic devices really oened our eyes to how to design. There were a couple of tough lessons that we learned during this project. The first was that when the robot rotated the motors moved at different speeds this made keeing a straight line difficult. To overcome this we decreased the step size between movements. The next is that when purchusing a art make sure it can do what we want it to do. The purchused solinoid could not easily attatch to the to the pen. There are solinoids that we could have bought with threads to mount stuff but we failed to check for how it will mount. This error caused us a lot of stress since it took a long time for us to figure out how to hold the pen. Finally, our project was not the most well designed most of the arts were from the scrap bin, but by having good controls, good resulution and a well tuned system helped to imrove our systems preformance in our project. 
 
-We learned that print timing is important
-
-The purchused solinoid we not made to attatch to the to the en easielly.  We learned how imortant it isThis was a har
-
-Having good controls, good resulution and a well tuned system helped emencly in our project 
-
-In this project, we learned how useful it is to have a greater understanding of various components. The solenoid was extremely helpful in being able to move the sharpie up and down. It was difficult to integrate the entire system into one machine since there are multiple devices to connect with one another. However, when combined, they make a far more efficient machine than previously imagined. The best advice to give to someone who might expand on our current setup, would be to familiarize themselves with each component to create the best possible machine. 
+For anyone who would like to build on our device, we have several recommendations could help. First improve the way the soliniod attatched to the pen currently it is attatched by a quick solder. This allows the pen to rotate while drawing which ruins the accuracy of our lines. If the connection were rigid the pen would be able to draw more accuratly. Additional parameter tuning is required to optimise the system the Ki and Kd are currently zero and the moter period and Kp could need more tuning. This would allow the drawing to get to each oint more accuratly and may even allow a decreaced toterance. Decreasing the amount of points in a contour would greatly imrove the speed at which the mechine prints.  
 
 ## Additional files
 
