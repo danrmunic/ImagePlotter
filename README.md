@@ -38,33 +38,54 @@ The image plotter hardware that is structuarl consists of a support bearing, a w
 
 The motors are in charge of moving the solenoid and pen carrage, which contains the sharpee and solenoid. One motor controls the radial distance by rotating the threaded shaft this pushes the solenoid and pen carrage along the shaft at about motor 1000 radians per about 8 inches of radial movement. The solenoid and pen carrage uses the direct drive shaft and wooden bearings to keep movement stable. The second motor controls the angular coordinate by using direct drive to move the wheel around a fixed rod at the orgin to create the theta angle, 20 radians on the motor is a 90 degree turn. We are also able to control when we lift and drop the pen using a solinoid. This allows the device to be able to draw on all areas of the paper. The solinoid is controlled by a mosfet when it is triggered the mosfet will allow current to flow from 5V to ground. We have a diode in parralel with the solinoid to protect our hardwear. The breadboard is used to provide a surface to connect electrical components. We have a limit switch which is mounted close to our motors. the limit switch allows up to locate the orgin when the solenoid and pen carrage crash into it. The wooden frame is what everything is mounted to and it provides support for the entire system. The support bearing adds another contact point to prevent the wooden frame from tilting. See figure 1 and 2 for hardware models. 
 
-![Hardwear]()
+![Hardwear](Images/HardwareIso.jpg)
 
 __Figure 1:__ Image Plotter Hardware.
 
-![Top View Hardwear](Images/OtherSideView.png)
+![Top View Hardwear](Images/HardwareTopView.jpg)
 
 __Figure 2:__ Top View of Image Plotter Hardware.
 
 Figure 3 shows a close up view of our nucleo and breadboard and shows our wiring layout.
 
-![Nucleo and Breadboard Layout](Images/OtherSideView.png)
+![Nucleo and Breadboard Layout](Images/NucleoAndBreadboard.jpg)
 
-__Figure 2:__ Top View of Image Plotter Hardware.
-
-
-
-
-
+__Figure 3:__ Top View of Image Plotter Hardware.
 
 ## Software Design Overview
-The software is designed using a number of generators which operate as tasks scheduled in [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py). The motor task sends the desired position to the motors using a [motor_driver](https://github.com/danrmunic/ImagePlotter/blob/main/src/motor_driver.py) object and [ClosedLoop](https://github.com/danrmunic/ImagePlotter/blob/main/src/closedloop.py) object, as well as receiving the motor position using an [Encoder](https://github.com/danrmunic/ImagePlotter/blob/main/src/Encoder.py) object to check if a movement is finished. The user task recieves points from the serial port which are sent from the computer in [PC.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/PC.py) (and generated in [sobel.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/sobel.py)). The logic task does the math to convert those points from rectangular coordinates to values which can be sent to the motors in the polar coordinate system. Finally, the Solenoid task moves the pen up and down while drawing based on input from the computer.  
+The software ran on the nucleo is designed using a number of generators which operate as tasks scheduled in [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py). These tasks are the motor task, user task, logic task, and solenoid task. The code ran in [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py) is meant to accept a singular rectangular coordinates from the user and convert them into motor angles. Then the motors will send the solenoid to that location. By using serial port communication we can continue to sent new rectangular cordinates until we have drawn a picture. Besides for accepting rectangular cordinates our code will also accept up "{" and down "}" commands to control the solinoid.
+
+The motor task sends both motors to the desired position using a [motor_driver](https://github.com/danrmunic/ImagePlotter/blob/main/src/motor_driver.py) object and [ClosedLoop](https://github.com/danrmunic/ImagePlotter/blob/main/src/closedloop.py) object, as well as receiving the motor position using an [Encoder](https://github.com/danrmunic/ImagePlotter/blob/main/src/Encoder.py) object to check if a movement is finished. The user task recieves points from the serial port which are sent from the computer in [PC.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/PC.py) (and generated in [sobel.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/sobel.py)). The logic task does the math to convert those points from rectangular coordinates to values which can be sent to the motors in the polar coordinate system. Finally, the Solenoid task moves the pen up and down while drawing based on input from the computer.  
 
 Variables are shared between tasks using Shares and Queues in [task_share.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/task_share.py)
 
-
 ## Results Overview
-The system was tested by sending a few pictures of squares as images. We noticed that when the image had short strokes, the machine was able to make precise movements and replicate it onto the paper. However, when there were large, signluar strokes, the machine would have difficulty recreating this image. This might be becaause the machine is working in radial and angular coordinates, so it struglles to be able to make straight lines.
+The system was tested by sending a few pictures of squares as images. We noticed that when the image had short strokes, the machine was able to make precise movements and replicate it onto the paper. However, when there were large, singular strokes, the machine would have difficulty recreating this line. This might be becaause the machine is working in radial and angular coordinates, so it struggles to be able to make straight lines. As we progressed with the project, we were able to change the parameters of the system in order to get the best results. We had the system draw three figures. The first was a simple rectangle picture shown in figure 4. 
+
+![Screen Shot 2022-03-15 at 5 07 27 PM](https://user-images.githubusercontent.com/97563760/158492037-c5d4670c-e1ba-402b-9508-dbc4c1ef846e.png)
+
+__Figure 4:__ Png Image of a Rectangle.
+
+The drawing our system replicated is shown in figure 5. As you can see, the image is not a perfect copy of the image in figure 4, this is due to the fact that due to the machine's coordinate system being cylidrical. This allowed for slight discrepanies as the machine did it's best to copy the image but was unable to make perfect lines. However, the results are still pretty amazing as the image is easily recognizable to the original image.
+
+__Figure 5:__ System's Drawing of a Rectangle.
+
+The next image that the machine drew was the word "IMAGE" as seen in figure 6. The drawing created by the robot can be seen in figure 7. Here we can see that the robot was able to replicate the drawing with a surprising amount of accuracy. One drawback was that machine took a large amount of time in order to complete this image as it could not move the pen at high speeds and the movements it made, while precise, were extremely small. We attempted to rectify this issue by having the machine draw every third point it recieved, but this led to any unstable system with the reliability gone. 
+
+
+![Screen Shot 2022-03-15 at 5 27 13 PM](https://user-images.githubusercontent.com/97563760/158493541-b9a949fc-e3b0-4a0a-b39e-d56c009b81c1.png)
+
+__Figure 6:__ Png Image of the Word Image.
+
+
+__Figure 7:__ System's Drawing of the Word Image.
+
+As for the last image, we had the image attempt to draw former US president Barack Obama. This was by far the most detailed image which unfortunately led to being the hardest one to complete. With all the details required, the image created unfortunately was not able to be an exact copy of the image we had. It also took a long time as the machine tried to capture every last detail.
+
+__Figure 8:__ Png Image of Obama.
+
+
+__Figure 9:__ System's Drawing of Obama.
 
 ## Expanding on the Process
 In this project, we learned how useful it is to have a greater understanding of various components. The solenoid was extremely helpful in being able to move the sharpie up and down. It was difficult to integrate the entire system into one machine since there are multiple devices to connect with one another. However, when combined, they make a far more efficient machine than previously imagined. The best advice to give to someone who might expand on our current setup, would be to familiarize themselves with each component in order to create the best possible machine.
@@ -100,3 +121,4 @@ In this project, we learned how useful it is to have a greater understanding of 
 We created a two and a half degree of freedom robot capable of drawing any image on a piece of paper from an uploaded image on our PC. The code turns an image into a series of points that our system draws. The system will be using a radial and angular coordinate system. The device is intended as a fun activity for casual users.
 
 The device uses a rotating base with two motors mounted on top. One motor spins a wheel to create rotational motion. Another motor creates linear motion that moves the pen linearly alongside a threaded shaft. The shafts are parallel to each other and are be connected with bearings and the pen mount. This setup allows the pen to mark up the entire page. We use a solenoid actuator and MOSFET to connect to the pen, and the solenoid lifts and lowers the pen. Our complete setup utilizes a signal microcontroller taking commands from a PC. Our Patterson Gearmotors require a larger voltage supply than our microcontroller can support, so we use the motor drivers with two H-bridges to control our motors in the project.
+
