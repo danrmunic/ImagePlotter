@@ -70,15 +70,22 @@ The drawing our system replicated is shown in figure 5. As you can see, the imag
 
 __Figure 5:__ System's Drawing of a Rectangle.
 
+The next image that the machine drew was the word "IMAGE" as seen in figure 6. The drawing created by the robot can be seen in figure 7. Here we can see that the robot was able to replicate the drawing with a surprising amount of accuracy. One drawback was that machine took a large amount of time in order to complete this image as it could not move the pen at high speeds and the movements it made, while precise, were extremely small. We attempted to rectify this issue by having the machine draw every third point it recieved, but this led to any unstable system with the reliability gone. 
+
+
+![Screen Shot 2022-03-15 at 5 27 13 PM](https://user-images.githubusercontent.com/97563760/158493541-b9a949fc-e3b0-4a0a-b39e-d56c009b81c1.png)
 
 __Figure 6:__ Png Image of the Word Image.
 
 
 __Figure 7:__ System's Drawing of the Word Image.
 
+As for the last image, we had the image attempt to draw former US president Barack Obama. This was by far the most detailed image which unfortunately led to being the hardest one to complete. With all the details required, the image created unfortunately was not able to be an exact copy of the image we had. It also took a long time as the machine tried to capture every last detail.
+
+__Figure 8:__ Png Image of Obama.
 
 
-
+__Figure 9:__ System's Drawing of Obama.
 
 ## Expanding on the Process
 In this project, we learned how useful it is to have a greater understanding of various components. The solenoid was extremely helpful in being able to move the sharpie up and down. It was difficult to integrate the entire system into one machine since there are multiple devices to connect with one another. However, when combined, they make a far more efficient machine than previously imagined. The best advice to give to someone who might expand on our current setup, would be to familiarize themselves with each component in order to create the best possible machine.
