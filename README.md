@@ -96,10 +96,13 @@ __Figure 8:__ Png Image of the Word Image.
 
 __Figure 9:__ System's Drawing of the Word Image.
 
-As for the last image, we had the image attempt to draw former US president Barack Obama. This was by far the most detailed image which unfortunately led to being the hardest one to complete. With all the details required, the image created unfortunately was not able to be an exact copy of the image we had. It also took a long time as the machine tried to capture every last detail.
+As for the last image, we had the image attempt to draw former US president Barack Obama. This was by far the most detailed image which unfortunately led to being the hardest one to complete. With all the details required, the image created unfortunately was not able to be an exact copy of the image we had. It also took a long time as the machine tried to capture every last detail. Our picture of Obama is unrecognisable.
+
+
 
 __Figure 10:__ Png Image of Obama.
 
+![Image](Images/Obama.jpg)
 
 __Figure 11:__ System's Drawing of Obama.
 
@@ -109,7 +112,6 @@ In this project, we learned how useful it is to have a greater understanding of 
 For anyone who would like to build on our device, we have several recommendations could help. First improve the way the solenoid attached to the pen currently it is attached by a quick solder. This allows the pen to rotate while drawing which ruins the accuracy of our lines. If the connection were rigid the pen would be able to draw more accurately. Additional parameter tuning is required to optimize the system the Ki and Kd are currently zero and the motor period and Kp could need more tuning. This would allow the drawing to get to each point more accurately and may even allow a decreased tolerance. Decreasing the number of points in a contour would greatly improve the speed at which the machine prints.  
 
 ## Additional files
-
 ### Microcontroller Classes
 
 * [main.py](https://github.com/danrmunic/ImagePlotter/blob/main/src/main.py)
