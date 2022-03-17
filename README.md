@@ -98,7 +98,7 @@ __Figure 9:__ System's Drawing of the Word Image.
 
 As for the last image, we had the image attempt to draw former US president Barack Obama. This was by far the most detailed image which unfortunately led to being the hardest one to complete. With all the details required, the image created unfortunately was not able to be an exact copy of the image we had. It also took a long time as the machine tried to capture every last detail. Our picture of Obama is unrecognisable.
 
-
+![Image](TestImages/obama.png)
 
 __Figure 10:__ Png Image of Obama.
 
