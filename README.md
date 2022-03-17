@@ -132,6 +132,10 @@ For anyone who would like to build on our device, we have several recommendation
 
 * [Image Plotter Website](https://danrmunic.github.io/ImagePlotter/index.html)
 
+### Solidworks files
+
+* [Solidworks files](https://github.com/danrmunic/ImagePlotter/tree/main/Solidworks%20Model)
+
 ### Images Used for Testing
 
 * [TestImages](https://github.com/danrmunic/ImagePlotter/tree/main/TestImages)
